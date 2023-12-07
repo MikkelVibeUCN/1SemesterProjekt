@@ -1,4 +1,4 @@
-package Model.Product;
+package model.product;
 
 public class LoanCopy {
 

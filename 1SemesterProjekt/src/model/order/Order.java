@@ -1,9 +1,9 @@
-package Model.Order;
+package model.order;
 
 import java.util.ArrayList;
 
-import Model.Customer;
-import Model.SalesAssistant;
+import model.Customer;
+import model.SalesAssistant;
 
 public class Order {
 	private Customer customer;
