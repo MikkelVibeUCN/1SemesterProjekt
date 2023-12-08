@@ -1,3 +1,5 @@
+package tui;
+
 import java.util.Scanner;
 
 import controller.OrderController;
