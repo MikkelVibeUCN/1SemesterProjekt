@@ -11,6 +11,9 @@ public class Discount {
 	public Discount(String type) {
 		this.type = type;
 		discountID = ++count;
+		this.discount = 0;
+		this.discountPercentage = 0;
+		
 	}
 	
 	public void setDiscount(double discount) {
