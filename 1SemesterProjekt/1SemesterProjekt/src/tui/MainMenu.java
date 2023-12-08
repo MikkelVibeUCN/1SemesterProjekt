@@ -3,6 +3,17 @@ package tui;
 import java.util.Scanner;
 
 public class MainMenu {
+	private OrderMenu orderMenu;
+	private ProductMenu productMenu;
+	private CustomerMenu customerMenu;
+	private SalesAssistantMenu salesAssistantMenu;
+	
+	public MainMenu() {
+		this.orderMenu = new OrderMenu();
+		this.productMenu = new ProductMenu();
+		this.customerMenu = new CustomerMenu();
+		this.salesAssistantMenu = new SalesAssistantMenu();
+	}
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -17,22 +28,24 @@ public class MainMenu {
 
    
             int choice = scanner.nextInt();
-
           
             switch (choice) {
                 case 1:
                 	//
-                 
+                	orderMenu.displayMenu();
                     break;
                 case 2:
                 	//
-            
+                	productMenu.displayMenu();
                     break;
                 case 3:
                     //
-              
+                	customerMenu.displayMenu();
                     break;
                 case 4:
+                	//
+                	salesAssistantMenu.displayMenu();
+                case 5:
                     exit = true;
                
                     break;
@@ -48,4 +61,6 @@ public class MainMenu {
         MainMenu menu = new MainMenu();
         menu.run();
     }
+    
+    
 }
