@@ -29,8 +29,14 @@ public class Order {
 		this.customer = customer;
 	}
 	
-	public void addCopyToOrder(UniqueCopy copy) {
-		
+	public boolean addCopyToOrder(UniqueCopy copy) {
+		try{
+			copies.add(copy);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
 	}
 	
 }
