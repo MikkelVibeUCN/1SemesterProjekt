@@ -8,4 +8,5 @@ public class CompositeLine {
 		this.quantity = quantity;
 		this.subPrice = subPrice;
 	}
+	
 }
