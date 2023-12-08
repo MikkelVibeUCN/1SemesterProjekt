@@ -3,6 +3,7 @@ package tui;
 import java.util.Scanner;
 
 import controller.OrderController;
+import model.order.Order;
 
 public class OrderMenu {
     private OrderController orderController;
