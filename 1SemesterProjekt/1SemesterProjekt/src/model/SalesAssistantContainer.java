@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SalesAssistantContainer {
 	private ArrayList<SalesAssistant> salesAssistants;
@@ -83,9 +82,7 @@ public class SalesAssistantContainer {
 //		}
 //	}
 	
-	public static void main(String[] args) {
-		Scanner keyboard = new Scanner(System.in);
-		
+	public static void main(String[] args) {	
 		SalesAssistantContainer container = SalesAssistantContainer.getInstance();
 		
 		for(int i = 0; i < 100; i++) {
