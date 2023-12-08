@@ -25,6 +25,8 @@ public class SalesAssistantContainer {
 	public SalesAssistant findSalesAssistant(int employeeID) {
 		SalesAssistant result = null; 
 		
+		int count = 0;
+		
 		boolean found = false;
 		int start = 0;
 		int end = salesAssistants.size();
@@ -45,7 +47,11 @@ public class SalesAssistantContainer {
 				end = middle;
 				middle = (start+end)/2;
 			}
+			System.out.println("Start " + start + " Middle: " + middle + " End: "+end);
+			
+			count++;
 		}
+		System.out.println(count);
 		return result;
 	}
 	
@@ -88,11 +94,9 @@ public class SalesAssistantContainer {
 		}
 		
 		SalesAssistant newAssistant = new SalesAssistant("swagman", "sejemail", "vesterbro", "sdasaaa", 5);
-		container.addSalesAssistant(newAssistant);
-		
-		container.findSalesAssistant(45);
-		
-		keyboard.next();
+		if(container.findSalesAssistant(30) != null) {
+			//found
+		}		
 
 	}
 	
