@@ -17,6 +17,8 @@ public class Order {
 	
 	public Order(SalesAssistant salesAssistant) {
 		this.salesAssistant = salesAssistant;
+		copies = new ArrayList<>();
+		orderLines = new ArrayList<>();
 		orderID = ++count;
 	}
 	
