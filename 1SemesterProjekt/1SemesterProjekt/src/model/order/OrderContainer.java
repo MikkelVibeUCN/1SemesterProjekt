@@ -12,7 +12,7 @@ public class OrderContainer {
 		orders = new ArrayList<>();
 	}
 	
-	public OrderContainer getInstance() {
+	public static OrderContainer getInstance() {
 		if(instance == null) {
 			instance = new OrderContainer();
 		}

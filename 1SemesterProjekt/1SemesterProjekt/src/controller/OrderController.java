@@ -11,6 +11,12 @@ public class OrderController {
 	private CustomerContainer customerContainer;
 	private SalesAssistantController salesAssistantController;
 	
+	public OrderController() {
+		orderContainer = OrderContainer.getInstance();
+		productContainer = ProductContainer.getInstance();
+		customerContainer = CustomerContainer.getInstance();
+		salesAssistantController = new SalesAssistantController();
+	}
 	// Create a new order with sales assistant from controller
 	public Order createOrder(int employeeID) {
 		return new Order(salesAssistantController.findSalesAssistant(employeeID));

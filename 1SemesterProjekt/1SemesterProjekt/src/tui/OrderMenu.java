@@ -1,14 +1,16 @@
 package tui;
 
 import java.util.Scanner;
-
 import controller.OrderController;
 import controller.CustomerController;
+import controller.SalesAssistantController;
 import model.order.Order;
 
 public class OrderMenu {
     private OrderController orderController;
     private CustomerController customerController;
+    private SalesAssistantController salesAssistantController;
+    
     private Scanner scanner;
     private Order currentOrder;
 
@@ -22,8 +24,9 @@ public class OrderMenu {
     	
         System.out.println("Ordre Menu:");
         System.out.println("1. Opret ny ordre");
+        System.out.println("2. Find ordre");
+        System.out.println("3. Slet ordre");
 
-        System.out.print("Hvad vil du?: ");
         int choice = scanner.nextInt();
 
         switch (choice) {
@@ -33,7 +36,7 @@ public class OrderMenu {
                 addProductByBarcode();
                 break;
             case 2:
-               //
+            	//
                 break;
             case 3:
             	//
@@ -46,30 +49,25 @@ public class OrderMenu {
     public int getIntFromUser() {
     	while(!scanner.hasNextInt()) {
     		System.out.println("Input skal være tal");
+    		scanner.nextLine();
     	}
     	return scanner.nextInt();
     }
     
     
     public void createOrder() {
-    	System.out.println("Indtast medarbejder ID");
-    	int employeeID = getIntFromUser();
-    	currentOrder = orderController.createOrder(employeeID);
+    	currentOrder = orderController.createOrder(1);
     	System.out.println("Ordre oprettet");
     }
     
     public void addCustomerToOrder() {
-    	if(currentOrder == null) {
-    		System.out.println("Der er ingen igangværende ordre");
-    	}
     	System.out.println("Indtast telefonnummer på kunde");
-    	String phoneNo = scanner.nextLine();
-    	customerController.findCustomer(phoneNo);
+    	String phoneNo = scanner.next();
     	
-    	if(orderController.addCustomerToOrder(phoneNo, currentOrder)){
-    		System.out.println("Kunde er tilføjet til ordren");
-    	
-    	} 
+    	if(customerController.findCustomer(phoneNo) != null) {
+    		orderController.addCustomerToOrder(phoneNo, currentOrder);
+        	System.out.println("Kunde er tilføjet til ordren");
+    	}
     	else {
     		System.out.println("Kunde eksisterer ikke");
     	}
@@ -77,9 +75,9 @@ public class OrderMenu {
     
     public void addProductByBarcode() {
     	System.out.println("Tilføj produkt");
-    	int barcode = scanner.nextInt(getIntFromUser());
+    	int barcode = getIntFromUser();
     	System.out.println("Indtast antal");
-    	int quantity = scanner.nextInt(getIntFromUser());
+    	int quantity = getIntFromUser();
     	
     	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
     		System.out.println("Produkt tilføjet");

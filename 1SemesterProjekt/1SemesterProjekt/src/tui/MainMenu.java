@@ -2,17 +2,22 @@ package tui;
 
 import java.util.Scanner;
 
+import model.SalesAssistant;
+
 public class MainMenu {
 	private OrderMenu orderMenu;
 	private ProductMenu productMenu;
 	private CustomerMenu customerMenu;
 	private SalesAssistantMenu salesAssistantMenu;
+	private SalesAssistant salesAssistant;
 	
 	public MainMenu() {
 		this.orderMenu = new OrderMenu();
 		this.productMenu = new ProductMenu();
 		this.customerMenu = new CustomerMenu();
 		this.salesAssistantMenu = new SalesAssistantMenu();
+		this.salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 69", "6969", 17);
+	
 	}
 
     public void run() {
@@ -24,6 +29,8 @@ public class MainMenu {
             System.out.println("1. Ordre menu");
             System.out.println("2. ");
             System.out.println("3. ");
+            System.out.println("4. ");
+            System.out.println("666. opret test data");
             System.out.println("0. Afslut");
 
    
@@ -45,6 +52,9 @@ public class MainMenu {
                 case 4:
                 	//
                 	salesAssistantMenu.displayMenu();
+                case 666:
+                	TryMe.createTestData();
+                	break;
                 case 5:
                     exit = true;
                
