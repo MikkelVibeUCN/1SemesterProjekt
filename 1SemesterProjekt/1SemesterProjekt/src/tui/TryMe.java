@@ -11,7 +11,7 @@ import model.product.ShelfProduct;
 public class TryMe {
 
 	
-	public int randomBarcode() {
+	public static int randomBarcode() {
 		String number = "";
 		Random random = new Random();
 		
@@ -30,7 +30,7 @@ public class TryMe {
 		return Integer.parseInt(number);
 	}
 	
-	private String randomPhoneNo() {
+	private static String randomPhoneNo() {
 		String number = "";
 		int length = 8;
 		Random random = new Random();
