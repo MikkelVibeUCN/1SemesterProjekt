@@ -7,14 +7,30 @@ import model.product.*;
 
 public class OrderController {
 	private OrderContainer orderContainer;
+	private CustomerContainer customerContainer;
 	private SalesAssistantController salesAssistantController;
 	
-	// Create a new order with salesassistant from controller
+	// Create a new order with sales assistant from controller
 	public Order createOrder(int employeeID) {
 		return new Order(salesAssistantController.findSalesAssistant(employeeID));
 	}
 	
-	/*public boolean addCustomerToOrder(String phoneNo, Order order) {
+	public Customer findCustomer(String phoneNo) {
+		return customerContainer.findCustomer(phoneNo);
 		
-	} */
+	}
+	public boolean addCustomerToOrder(String phoneNo, Order order) {
+		boolean result = false;
+		Customer customer = findCustomer(phoneNo);
+		if(customer != null) {
+			order.addCustomer(customer);
+			result = true;
+		}
+		return result;
+		
+	}
+	
+	public boolean 
+		
 }
+
