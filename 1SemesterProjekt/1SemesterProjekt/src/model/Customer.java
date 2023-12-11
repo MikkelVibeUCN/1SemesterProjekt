@@ -7,7 +7,7 @@ public class Customer extends Person implements Comparable<Customer> {
 	private int id;
 	private static int count;
 	
-	public Customer(String name, String mail, String address, String phoneNo, int age, int employeeID, String type) {
+	public Customer(String name, String mail, String address, String phoneNo, int age, String type) {
 		super(name, mail, address, phoneNo, age);
 		this.type = type;
 		id = ++count;
@@ -24,4 +24,6 @@ public class Customer extends Person implements Comparable<Customer> {
 	public int compareTo(Customer customer) {
 		return getPhoneNo().compareTo(customer.getPhoneNo());
 	}
+	
+	
 }
