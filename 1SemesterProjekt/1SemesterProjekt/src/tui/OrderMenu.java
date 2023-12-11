@@ -73,20 +73,35 @@ public class OrderMenu {
     	}
     }
     
+    
     public void addProductByBarcode() {
-    	System.out.println("Tilføj produkt");
-    	int barcode = getIntFromUser();
-    	System.out.println("Indtast antal");
-    	int quantity = getIntFromUser();
-    	
-    	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
-    		System.out.println("Produkt tilføjet");
-    	}
-    	else {
-    		System.out.println("Produkt eksisterer ikke");
-    	}
-    	
+        boolean isCompleted = false;
+        
+        while(!isCompleted) {
+        	System.out.println("Indtast produkt barcode eller tast \"0\" for at afslutte");
+        	int input = getIntFromUser();
+        	if(input == 0) {
+        		isCompleted = true;
+        	}
+        	else {
+        		System.out.println();
+            	int barcode = input;
+            	System.out.println("Indtast antal");
+            	int quantity = getIntFromUser();
+            	
+            	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
+            		System.out.println("Produkt tilføjet");
+            	}
+            	else {
+            		System.out.println("Produkt eksisterer ikke");
+            	}
+        	}
+        }
+        System.out.println(currentOrder.getInfo());
     }
+ 
+    
+    
     
     public void addProductBySerialNo(int serialNo) {
     	//addProductBySerialNo();

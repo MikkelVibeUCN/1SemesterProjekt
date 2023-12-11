@@ -46,4 +46,22 @@ public class Order {
 		return orderID;
 	}
 	
+	public String getInfo() {
+		String result = "ID af ordren: " + orderID + ", total price:  ";
+		for(OrderLine orderLine : orderLines) {
+			result += "Barcode: " + orderLine.getProduct().getBarcode() + " Price:" + orderLine.getProduct().getPrice();
+		}
+		return result;
+	}
+	
+	public double totalPrice() {
+		double result = 0;
+		
+		for(OrderLine orderLine : orderLines) {
+			result += orderLine.getSubTotal();
+		}
+		
+		return customer.getDiscount().calculatePrice(result);
+	}
+	
 }

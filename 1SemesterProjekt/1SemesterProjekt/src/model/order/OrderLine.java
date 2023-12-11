@@ -9,4 +9,12 @@ public class OrderLine {
 		this.quantity = quantity;
 		this.product = product;
 	}
+	
+	public Product getProduct() {
+		return product;
+	}
+	
+	public double getSubTotal() {
+		return quantity * product.getPrice();
+	}
 }

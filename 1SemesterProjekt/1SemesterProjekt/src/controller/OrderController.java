@@ -22,7 +22,6 @@ public class OrderController {
 		return new Order(salesAssistantController.findSalesAssistant(employeeID));
 	}
 	
-		
 	public boolean addCustomerToOrder(String phoneNo, Order order) {
 		boolean result = false;
 		Customer customer = customerContainer.findCustomer(phoneNo);
