@@ -24,6 +24,4 @@ public class Customer extends Person implements Comparable<Customer> {
 	public int compareTo(Customer customer) {
 		return getPhoneNo().compareTo(customer.getPhoneNo());
 	}
-	
-	
 }

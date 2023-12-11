@@ -7,5 +7,5 @@ public class LoanProduct extends Product {
 		this.hourlyPrice = hourlyPrice;
 		
 	}
-
+	
 }
