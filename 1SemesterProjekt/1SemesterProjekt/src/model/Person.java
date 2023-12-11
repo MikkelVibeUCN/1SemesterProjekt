@@ -18,4 +18,8 @@ public abstract class Person {
 		this.phoneNo = phoneNo;
 		this.age = age;
 	}
+	
+	public String getPhoneNo() {
+		return phoneNo;
+	}
 }

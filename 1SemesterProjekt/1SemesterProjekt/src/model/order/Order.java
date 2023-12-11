@@ -10,7 +10,7 @@ public class Order {
 	private Customer customer;
 	private SalesAssistant salesAssistant;
 	private int orderID;
-	private ArrayList<UniqueCopy> copies;
+	private ArrayList<Product> copies;
 	private ArrayList<OrderLine> orderLines;
 	
 	private static int count;
@@ -29,7 +29,7 @@ public class Order {
 		this.customer = customer;
 	}
 	
-	public boolean addCopyToOrder(UniqueCopy copy) {
+	public boolean addCopyToOrder(Product copy) {
 		try{
 			copies.add(copy);
 			return true;

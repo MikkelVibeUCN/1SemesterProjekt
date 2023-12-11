@@ -1,6 +1,6 @@
 package model;
 
-public class Customer extends Person {
+public class Customer extends Person implements Comparable<Customer> {
 	
 	private String type;
 	private Discount discount;
@@ -19,5 +19,9 @@ public class Customer extends Person {
 	
 	public int getID() {
 		return id;
+	}
+	
+	public int compareTo(Customer customer) {
+		return getPhoneNo().compareTo(customer.getPhoneNo());
 	}
 }

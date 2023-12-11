@@ -42,4 +42,8 @@ public class Discount {
 		}
 		return result;
 	}
+	
+	public int getID() {
+		return discountID;
+	}
 }
