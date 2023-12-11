@@ -3,8 +3,17 @@ import java.util.ArrayList;
 
 public class CustomerContainer {
 	private ArrayList<Customer> customers;
+	private static CustomerContainer instance;
 	
-	public CustomerContainer() {
+	
+	public static CustomerContainer getInstance() {
+		if(instance == null) {
+			instance = new CustomerContainer();
+		}
+		return instance;
+	}
+	
+	private CustomerContainer() {
 		customers = new ArrayList<>();
 	}
 	
