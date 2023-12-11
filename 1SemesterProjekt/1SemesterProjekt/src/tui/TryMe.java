@@ -43,7 +43,7 @@ public class TryMe {
 		return number;
 	}
 	
-	public void createTestData() {
+	public static void createTestData() {
 		// Create Products
 		ProductContainer productContainer = ProductContainer.getInstance();
 		
