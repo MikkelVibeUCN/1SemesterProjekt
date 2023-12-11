@@ -1,6 +1,6 @@
 package model.product;
 
-public abstract class Product implements Comparable<Product>{
+public abstract class Product implements Comparable<Product> {
 	private String name;
 	private double minimumPrice;
 	private double price;
@@ -18,5 +18,9 @@ public abstract class Product implements Comparable<Product>{
 	
 	public int getBarcode() {
 		return barcode;
+	}
+	
+	public int compareTo(Product product) {
+		return this.barcode - product.getBarcode();
 	}
 }

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import model.order.Order;
 import model.product.Product;
 
 public class ProductContainer {
 	private ArrayList<Product> products;
-	private static final int START_SIZE = 1000;
+	private static final int START_SIZE = 28000;
 	private static ProductContainer instance;
 	
 	public static ProductContainer getInstance() {
@@ -27,34 +28,33 @@ public class ProductContainer {
 		Collections.sort(products);
 	}
 	
-	public Customer findCustomer(String phoneNo) {
-		Customer result = null; 
+	public Product findProduct(int barcode) {
+		Product result = null; 
 		
 		boolean found = false;
 		int start = 0;
-		int end = customers.size()-1;
-		int middle = customers.size()/2;
-		
+		int end = products.size();
+		int middle = products.size()/2;
 		while(!found && middle != end) {
-			if(customers.get(middle).getPhoneNo().equals(phoneNo)) {
-				result = customers.get(middle);
+			if(products.get(middle).getBarcode() == barcode) {
+				result = products.get(middle);
 				found = true;
 			}
-			else if(customers.get(middle).getPhoneNo().compareTo(phoneNo) < 0) {
+			else if(barcode > products.get(middle).getBarcode()) {
 				start = middle;
 				middle = (start+end)/2;
 			}
-			else if(customers.get(middle).getPhoneNo().compareTo(phoneNo) > 0){
+			else if(barcode < products.get(middle).getBarcode()){
 				end = middle;
 				middle = (start+end)/2;
-			}
+			}	
 		}
 		return result;
 	}
 	
-	public String randomPhoneNo() {
+	public int randomBarcode() {
 		String number = "";
-		int length = 8;
+		int length = 18;
 		Random random = new Random();
 		
 		while(length-- > 0) {
@@ -62,20 +62,15 @@ public class ProductContainer {
 			
 			number += nextNumber;
 		}
-		return number;
+		return trynumber;
 	}
 	
 	
 	public static void main(String[] args) {
-		CustomerContainer container = CustomerContainer.getInstance();
+		ProductContainer container = ProductContainer.getInstance();
 		
 		for(int i = 0; i < 500; i++) {
-			Customer newCustomer = new Customer("Sejt navn", "seh@gmail.com", "aalborg somewhere lol", container.randomPhoneNo(), 5, "Regular");
-			container.addCustomer(newCustomer);
+			 ShelfProduct newProduct = new ShelfProduct("test", (double)200, (double)200, "product-swag", container.randomBarcode(), 200, 500, 300, "group 1");
 		}
-		
-		container.addCustomer(new Customer("Test", "test", "test", "12345678", 5, "test"));
-		
-		System.out.println(container.findCustomer("12345678").getID());
 	}
 }
