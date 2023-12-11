@@ -2,10 +2,8 @@ package model.product;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
+//import java.util.Random;
 
-import model.order.Order;
-import model.product.Product;
 
 public class ProductContainer {
 	private ArrayList<Product> products;
