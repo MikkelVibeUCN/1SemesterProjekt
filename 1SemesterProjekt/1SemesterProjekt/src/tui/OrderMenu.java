@@ -21,7 +21,7 @@ public class OrderMenu {
     public void displayMenu() {
     	
         System.out.println("Ordre Menu:");
-        System.out.println("1. Create Order");
+        System.out.println("1. Opret ny ordre");
 
         System.out.print("Hvad vil du?: ");
         int choice = scanner.nextInt();
@@ -29,9 +29,11 @@ public class OrderMenu {
         switch (choice) {
             case 1:
                 createOrder();
+                addCustomerToOrder(); 
+                addProductByBarcode();
                 break;
             case 2:
-                addCustomerToOrder(); 
+               //
                 break;
             case 3:
             	//
@@ -70,17 +72,24 @@ public class OrderMenu {
     	} 
     	else {
     		System.out.println("Kunde eksisterer ikke");
-    }
-    
-    public void addProductByBarcode(int Barcode) {
-    	System.out.println("Tilføj produkt");
-    	
-    	
-    	int barcode = scanner.nextInt(barcode);
-    	orderController.addProductByBarcode(barcode);
-    	System.out.println("Produkt tilføjet");
     	}
     }
+    
+    public void addProductByBarcode() {
+    	System.out.println("Tilføj produkt");
+    	int barcode = scanner.nextInt(getIntFromUser());
+    	System.out.println("Indtast antal");
+    	int quantity = scanner.nextInt(getIntFromUser());
+    	
+    	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
+    		System.out.println("Produkt tilføjet");
+    	}
+    	else {
+    		System.out.println("Produkt eksisterer ikke");
+    	}
+    	
+    }
+    
     public void addProductBySerialNo(int serialNo) {
     	//addProductBySerialNo();
     }

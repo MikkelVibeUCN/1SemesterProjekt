@@ -29,6 +29,7 @@ public class Order {
 		this.customer = customer;
 	}
 	
+
 	public boolean addCopyToOrder(Product copy) {
 		try{
 			copies.add(copy);

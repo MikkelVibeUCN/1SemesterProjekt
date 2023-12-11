@@ -7,6 +7,7 @@ import model.product.*;
 
 public class OrderController {
 	private OrderContainer orderContainer;
+	private ProductContainer productContainer;
 	private CustomerContainer customerContainer;
 	private SalesAssistantController salesAssistantController;
 	
@@ -15,13 +16,10 @@ public class OrderController {
 		return new Order(salesAssistantController.findSalesAssistant(employeeID));
 	}
 	
-	public Customer findCustomer(String phoneNo) {
-		return customerContainer.findCustomer(phoneNo);
 		
-	}
 	public boolean addCustomerToOrder(String phoneNo, Order order) {
 		boolean result = false;
-		Customer customer = findCustomer(phoneNo);
+		Customer customer = customerContainer.findCustomer(phoneNo);
 		if(customer != null) {
 			order.addCustomer(customer);
 			result = true;
@@ -30,7 +28,15 @@ public class OrderController {
 		
 	}
 	
-	public boolean 
+	public boolean addProductByBarcode(int quantity, int barcode, Order order) {
+		boolean result = false;
+		Product product = productContainer.findProduct(barcode);
+		if(product != null) {
+			order.createOrderLine(quantity, product);
+			result = true;
+		}
+		return result;
 		
+	}
 }
 
