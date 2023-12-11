@@ -39,4 +39,8 @@ public class Order {
 		}
 	}
 	
+	public int getID() {
+		return orderID;
+	}
+	
 }
