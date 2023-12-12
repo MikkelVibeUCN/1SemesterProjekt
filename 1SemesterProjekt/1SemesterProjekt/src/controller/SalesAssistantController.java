@@ -1,5 +1,6 @@
 package controller;
-import model.*;
+import model.SalesAssistant;
+import model.SalesAssistantContainer;
 
 public class SalesAssistantController {
 	private SalesAssistantContainer salesAssistantContainer;
@@ -10,8 +11,6 @@ public class SalesAssistantController {
 	}
 	
 	public SalesAssistant findSalesAssistant(int employeeID) {
-		SalesAssistant salesAssistant = salesAssistantContainer.findSalesAssistant(employeeID);
-		return salesAssistant;
+		return salesAssistantContainer.findSalesAssistant(employeeID);
 	}
-	}
-
+}
