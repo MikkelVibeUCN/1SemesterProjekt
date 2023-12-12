@@ -1,5 +1,6 @@
 package controller;
-import model.*;
+import model.Customer;
+import model.CustomerContainer;
 
 public class CustomerController {
 	private CustomerContainer customerContainer;
@@ -8,7 +9,6 @@ public class CustomerController {
 		customerContainer = CustomerContainer.getInstance();
 	}
 	public Customer findCustomer(String phoneNo) {
-		Customer customer = customerContainer.findCustomer(phoneNo);
-		return customer;
+		return customerContainer.findCustomer(phoneNo);
 	}
 }
