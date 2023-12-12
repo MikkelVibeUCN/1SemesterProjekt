@@ -1,10 +1,8 @@
 package tui;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 import model.*;
-import model.product.Product;
 import model.product.ProductContainer;
 import model.product.ShelfProduct;
 
@@ -25,8 +23,9 @@ public class TryMe {
 			else {
 				nextNumber = random.nextInt(0, 9);
 			}
-		number += nextNumber;
-		}		
+			number += nextNumber;
+		}	
+		System.out.println(number);
 		return Integer.parseInt(number);
 	}
 	

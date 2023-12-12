@@ -16,13 +16,8 @@ public class ShelfProduct extends Product{
 		this.maximumStock = maximumStock;
 		this.stockAmount = stockAmount;
 		this.productGroup = productGroup;
-		
 	}
 	
-<<<<<<< Updated upstream
-}
-
-=======
 	public int getStockAmount() {
 		return stockAmount;
 	}
@@ -51,4 +46,3 @@ public class ShelfProduct extends Product{
 		return result;
 	}
 }
->>>>>>> Stashed changes
