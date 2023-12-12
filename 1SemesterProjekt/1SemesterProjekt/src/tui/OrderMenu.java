@@ -9,17 +9,12 @@ import model.order.Order;
 
 public class OrderMenu {
     private OrderController orderController;
-    private CustomerController customerController;
-    private ProductController productController;
-    private SalesAssistantController salesAssistantController;
     
     private Scanner scanner;
     private Order currentOrder;
 
     public OrderMenu() {
-    	this.productController = new ProductController();
         this.orderController = new OrderController();
-        this.customerController = new CustomerController();
         this.scanner = new Scanner(System.in);
     }
 
@@ -57,7 +52,6 @@ public class OrderMenu {
     	return scanner.nextInt();
     }
     
-    
     public void createOrder() {
     	currentOrder = orderController.createOrder(1);
     	System.out.println("Ordre oprettet");
@@ -67,7 +61,7 @@ public class OrderMenu {
     	System.out.println("Indtast telefonnummer på kunde");
     	String phoneNo = scanner.next();
     	
-    	if(customerController.findCustomer(phoneNo) != null) {
+    	if(orderController.findCustomer(phoneNo) != null) {
     		orderController.addCustomerToOrder(phoneNo, currentOrder);
         	System.out.println("Kunde er tilføjet til ordren");
     	}
@@ -75,7 +69,6 @@ public class OrderMenu {
     		System.out.println("Kunde eksisterer ikke");
     	}
     }
-    
     
     public void addProductByBarcode() {
         boolean isCompleted = false;
@@ -112,12 +105,12 @@ public class OrderMenu {
             	
             	// Check quantity
     	
-            	while(!productController.isValidAmount(barcode, quantity) || quantity == 0) {
-            		System.out.println("Antallet er ugyldigt, skal være over 0 og under " + productController.getStockAmount(barcode));
+            	while(!orderController.isValidAmount(barcode, quantity) || quantity == 0) {
+            		System.out.println("Antallet er ugyldigt, skal være over 0 og under " + orderController.getStockAmount(barcode));
             		quantity = getIntFromUser();
             	}
             	
-            	productController.removeStock(barcode, quantity);
+            	orderController.removeStock(barcode, quantity);
             	
             	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
             		System.out.println("Produkt tilføjet");

@@ -54,4 +54,20 @@ public class OrderController {
 	public boolean confirmOrder(Order order) {
 		return orderContainer.addOrder(order);
 	}
+	
+	public Customer findCustomer(String phoneNo) {
+		return customerController.findCustomer(phoneNo);
+	}
+	
+	public boolean isValidAmount(int barcode, int quantity) {
+		return productController.isValidAmount(barcode, quantity);
+	}
+	
+	public int getStockAmount(int barcode) {
+		return productController.getStockAmount(barcode);
+	}
+	
+	public void removeStock(int barcode, int quantity) {
+		productController.removeStock(barcode, quantity);
+	}
 }
