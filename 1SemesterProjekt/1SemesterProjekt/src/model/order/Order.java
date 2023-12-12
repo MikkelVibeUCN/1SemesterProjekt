@@ -49,6 +49,10 @@ public class Order {
 		return orderID;
 	}
 	
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLines;
+	}
+	
 	public boolean hasProduct(Product product) {
 		boolean result = false;
 		if(findOrderLineFromProduct(product) != null) {

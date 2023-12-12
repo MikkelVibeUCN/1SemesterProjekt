@@ -3,6 +3,7 @@ package tui;
 import java.util.Random;
 
 import model.*;
+import model.product.Product;
 import model.product.ProductContainer;
 import model.product.ShelfProduct;
 
@@ -23,7 +24,6 @@ public class TryMe {
 			}
 			number += nextNumber;
 		}	
-		System.out.println(number);
 		return Integer.parseInt(number);
 	}
 	
@@ -49,6 +49,10 @@ public class TryMe {
 			 productContainer.addProduct(newProduct);	 
 		}
 		
+		for(Product product : productContainer.getProducts()) {
+			System.out.println(product.getBarcode());
+		}
+		
 		productContainer.addProduct(new ShelfProduct("test1", (double)200, (double)200, "product-swag", 123456, 200, 500, 300, "group 1"));
 		
 		// Create Customers
@@ -72,7 +76,6 @@ public class TryMe {
 		newContainer.addDiscount(discount);
 		
 		customer.setDiscount(discount);
-		
 		
 		SalesAssistant salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 69", "6969", 17);
 		

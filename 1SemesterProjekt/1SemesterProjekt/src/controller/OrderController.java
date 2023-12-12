@@ -1,9 +1,10 @@
 package controller;
-import javax.swing.plaf.basic.BasicBorders;
 
-import model.*;
-import model.order.*;
-import model.product.*;
+import model.Customer;
+import model.order.Order;
+import model.order.OrderContainer;
+import model.order.OrderLine;
+import model.product.Product;
 
 public class OrderController {
 	private OrderContainer orderContainer;
@@ -17,7 +18,7 @@ public class OrderController {
 		customerController = new CustomerController();
 		salesAssistantController = new SalesAssistantController();
 	}
-	// Create a new order with sales assistant from controller
+	
 	public Order createOrder(int employeeID) {
 		return new Order(salesAssistantController.findSalesAssistant(employeeID));
 	}
@@ -30,7 +31,6 @@ public class OrderController {
 			result = true;
 		}
 		return result;
-		
 	}
 	
 	public boolean addProductByBarcode(int quantity, int barcode, Order order) {
@@ -45,7 +45,6 @@ public class OrderController {
 			}
 			else {
 				order.createOrderLine(quantity, product);
-				
 			}
 			result = true;
 		}
@@ -56,4 +55,3 @@ public class OrderController {
 		return orderContainer.addOrder(order);
 	}
 }
-

@@ -98,6 +98,7 @@ public class OrderMenu {
         	int input = getIntFromUser();
         	if(input == 0) {
         		isCompleted = true;
+        		
         		if(hasAdded) {
         			confirmOrder(currentOrder);
         		}
@@ -115,6 +116,8 @@ public class OrderMenu {
             		System.out.println("Antallet er ugyldigt, skal være over 0 og under " + productController.getStockAmount(barcode));
             		quantity = getIntFromUser();
             	}
+            	
+            	productController.removeStock(barcode, quantity);
             	
             	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
             		System.out.println("Produkt tilføjet");

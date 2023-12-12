@@ -11,15 +11,16 @@ public class ProductController {
 	
 	public int getStockAmount(int barcode) {
 		int result = -1;
-		Product p = productContainer.findProduct(barcode);
-		if(p instanceof ShelfProduct) {
-			result = ((ShelfProduct) p).getStockAmount();
+		Product product = findProduct(barcode);
+		if(product instanceof ShelfProduct) {
+			result = ((ShelfProduct) product).getStockAmount();
 		}
 		return result;
 	}
 	
-	public boolean removeStock(Product product, int amount) {
+	public boolean removeStock(int barcode, int amount) {
 		boolean result = false;
+		Product product = findProduct(barcode);
 		if(product instanceof ShelfProduct) {
 			((ShelfProduct) product).removeStock(amount);
 			result = true;
@@ -29,7 +30,7 @@ public class ProductController {
 	
 	public boolean isValidAmount(int barcode, int amount) {
 		boolean result = false;
-		Product product = productContainer.findProduct(barcode);
+		Product product = findProduct(barcode);
 		if(product instanceof ShelfProduct) {
 			result = ((ShelfProduct) product).isValidAmount(amount);
 		}
