@@ -76,9 +76,19 @@ public class OrderMenu {
     
     public void addProductByBarcode() {
         boolean isCompleted = false;
+        boolean hasAdded = false;
         
         while(!isCompleted) {
-        	System.out.println("Indtast produkt barcode eller tast \"0\" for at afslutte");
+        	String message = "Indtast produkt barcode";
+        	if(hasAdded) {
+        		message +=  "eller tast \"0\" for at afslutte";
+        		System.out.println(currentOrder.getInfo());
+        	} 
+        	else {
+        		message += "eller tast \"0\" for at bekræfte";
+        	}
+        	
+        	System.out.println(message);
         	int input = getIntFromUser();
         	if(input == 0) {
         		isCompleted = true;
@@ -91,13 +101,14 @@ public class OrderMenu {
             	
             	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
             		System.out.println("Produkt tilføjet");
+            		hasAdded = true;
             	}
             	else {
             		System.out.println("Produkt eksisterer ikke");
             	}
         	}
         }
-        System.out.println(currentOrder.getInfo());
+        
     }
  
     
