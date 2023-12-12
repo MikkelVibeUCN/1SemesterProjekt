@@ -81,11 +81,11 @@ public class OrderMenu {
         while(!isCompleted) {
         	String message = "Indtast produkt barcode";
         	if(hasAdded) {
-        		message +=  "eller tast \"0\" for at afslutte";
+        		message += "eller tast \"0\" for at bekræfte";
         		System.out.println(currentOrder.getInfo());
         	} 
         	else {
-        		message += "eller tast \"0\" for at bekræfte";
+        		message +=  "eller tast \"0\" for at afslutte";
         	}
         	
         	System.out.println(message);
