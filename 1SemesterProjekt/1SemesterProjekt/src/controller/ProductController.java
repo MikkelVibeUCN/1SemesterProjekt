@@ -35,4 +35,8 @@ public class ProductController {
 		}
 		return result;
 	}
+	
+	public Product findProduct(int barcode) {
+		return productContainer.findProduct(barcode);
+	}
 }

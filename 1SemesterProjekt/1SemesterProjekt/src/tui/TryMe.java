@@ -7,8 +7,6 @@ import model.product.ProductContainer;
 import model.product.ShelfProduct;
 
 public class TryMe {
-
-	
 	public static int randomBarcode() {
 		String number = "";
 		Random random = new Random();
