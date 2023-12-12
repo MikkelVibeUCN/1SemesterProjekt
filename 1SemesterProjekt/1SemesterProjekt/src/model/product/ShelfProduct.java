@@ -18,5 +18,6 @@ public class ShelfProduct extends Product{
 		this.productGroup = productGroup;
 		
 	}
+	
 }
 
