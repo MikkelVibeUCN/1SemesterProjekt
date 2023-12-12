@@ -16,6 +16,10 @@ public abstract class Product implements Comparable<Product> {
 		return price;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public int getBarcode() {
 		return barcode;
 	}

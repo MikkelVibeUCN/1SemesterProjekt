@@ -22,4 +22,8 @@ public abstract class Person {
 	public String getPhoneNo() {
 		return phoneNo;
 	}
+	
+	public String getName() {
+		return name;
+	}
 }

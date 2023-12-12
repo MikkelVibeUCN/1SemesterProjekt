@@ -19,5 +19,36 @@ public class ShelfProduct extends Product{
 		
 	}
 	
+<<<<<<< Updated upstream
 }
 
+=======
+	public int getStockAmount() {
+		return stockAmount;
+	}
+	
+	public void removeStock(int amount) {
+		stockAmount -= amount; 
+	}
+	
+	public void addStock(int amount) {
+		stockAmount += amount;
+	}
+	
+	public int getMinimumStock() {
+		return minimumStock;
+	}
+	
+	public int getMaximumStock() {
+		return maximumStock;
+	}
+	
+	public boolean isValidAmount(int amount) {
+		boolean result = false;
+		if(stockAmount - amount >= 0) {
+			result = true;
+		}
+		return result;
+	}
+}
+>>>>>>> Stashed changes

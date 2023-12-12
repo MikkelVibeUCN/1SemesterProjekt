@@ -30,6 +30,8 @@ public class ProductContainer {
 		Collections.sort(products);
 	}
 	
+	
+	
 	public Product findProduct(int barcode) {
 		Product result = null; 
 		

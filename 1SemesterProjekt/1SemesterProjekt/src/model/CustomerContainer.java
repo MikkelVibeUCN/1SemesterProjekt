@@ -50,31 +50,4 @@ public class CustomerContainer {
 		}
 		return result;
 	}
-	
-	public String randomPhoneNo() {
-		String number = "";
-		int length = 8;
-		Random random = new Random();
-		
-		while(length-- > 0) {
-			int nextNumber = random.nextInt(0, 9);
-			
-			number += nextNumber;
-		}
-		return number;
-	}
-	
-	
-	public static void main(String[] args) {
-		CustomerContainer container = CustomerContainer.getInstance();
-		
-		for(int i = 0; i < 500; i++) {
-			Customer newCustomer = new Customer("Sejt navn", "seh@gmail.com", "aalborg somewhere lol", container.randomPhoneNo(), 5, "Regular");
-			container.addCustomer(newCustomer);
-		}
-		
-		container.addCustomer(new Customer("Test", "test", "test", "12345678", 5, "test"));
-		
-		System.out.println(container.findCustomer("12345678").getID());
-	}
 }

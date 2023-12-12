@@ -37,11 +37,23 @@ public class OrderController {
 		boolean result = false;
 		Product product = productContainer.findProduct(barcode);
 		if(product != null) {
-			order.createOrderLine(quantity, product);
+			if(order.hasProduct(product)) {
+				OrderLine orderLine = order.findOrderLineFromProduct(product);
+				if(orderLine != null) {
+					orderLine.addQuantity(quantity);
+				}
+			}
+			else {
+				order.createOrderLine(quantity, product);
+				
+			}
 			result = true;
 		}
 		return result;
-		
+	}
+	
+	public boolean confirmOrder(Order order) {
+		return orderContainer.addOrder(order);
 	}
 }
 

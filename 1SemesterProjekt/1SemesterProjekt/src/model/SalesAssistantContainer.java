@@ -28,7 +28,7 @@ public class SalesAssistantContainer {
 		int start = 0;
 		int end = salesAssistants.size();
 		int middle = salesAssistants.size()/2;
-		while(!found && middle != end) {
+		while(!found) {
 			if(salesAssistants.get(middle).getID() == employeeID) {
 				result = salesAssistants.get(middle);
 				found = true;
@@ -72,20 +72,5 @@ public class SalesAssistantContainer {
 //			}	
 //		}
 //	}
-	
-	public static void main(String[] args) {	
-		SalesAssistantContainer container = SalesAssistantContainer.getInstance();
-		
-		for(int i = 0; i < 100; i++) {
-			SalesAssistant newAssistant = new SalesAssistant("swagman", "sejemail", "vesterbro", "sdasaaa", 5);
-			container.addSalesAssistant(newAssistant);
-		}
-		
-		SalesAssistant newAssistant = new SalesAssistant("swagman", "sejemail", "vesterbro", "sdasaaa", 5);
-		if(container.findSalesAssistant(30) != null) {
-			//found
-		}		
-
-	}
 	
 }

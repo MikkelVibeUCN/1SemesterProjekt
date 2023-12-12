@@ -17,4 +17,12 @@ public class OrderLine {
 	public double getSubTotal() {
 		return quantity * product.getPrice();
 	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public void addQuantity(int amount) {
+		this.quantity += amount;
+	}
 }

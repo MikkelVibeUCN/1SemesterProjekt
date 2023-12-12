@@ -16,7 +16,7 @@ public class MainMenu {
 		this.productMenu = new ProductMenu();
 		this.customerMenu = new CustomerMenu();
 		this.salesAssistantMenu = new SalesAssistantMenu();
-		this.salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 69", "6969", 17);
+		
 	
 	}
 

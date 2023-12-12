@@ -19,7 +19,7 @@ public class OrderContainer {
 		return instance;
 	}
 	
-	public boolean confirmOrder(Order order) {
+	public boolean addOrder(Order order) {
 		try{
 			orders.add(order);
 			return true;
@@ -36,7 +36,7 @@ public class OrderContainer {
 		int start = 0;
 		int end = orders.size();
 		int middle = orders.size()/2;
-		while(!found && middle != end) {
+		while(!found) {
 			if(orders.get(middle).getID() == orderID) {
 				result = orders.get(middle);
 				found = true;
@@ -52,4 +52,6 @@ public class OrderContainer {
 		}
 		return result;
 	}
+	
+	
 }

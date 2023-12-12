@@ -16,7 +16,6 @@ public class Discount {
 		this.discountID = ++count;
 		this.discount = 0;
 		this.discountPercentage = 0;
-		
 	}
 	
 	public void setDiscount(double discount) {

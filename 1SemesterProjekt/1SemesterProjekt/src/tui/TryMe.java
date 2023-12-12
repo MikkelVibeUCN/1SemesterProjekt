@@ -1,9 +1,9 @@
 package tui;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
-import model.Customer;
-import model.CustomerContainer;
+import model.*;
 import model.product.Product;
 import model.product.ProductContainer;
 import model.product.ShelfProduct;
@@ -62,7 +62,26 @@ public class TryMe {
 			customerContainer.addCustomer(newCustomer);
 		}
 		
-		customerContainer.addCustomer(new Customer("Sejt navn", "seh@gmail.com", "aalborg somewhere lol", "12345678", 5, "Regular"));
+		
+		Customer customer = new Customer("Sejt navn", "seh@gmail.com", "aalborg somewhere lol", "12345678", 5, "Regular");
+		
+		customerContainer.addCustomer(customer);
+		DiscountContainer newContainer = DiscountContainer.getInstance();
+		
+		Discount discount = new Discount("Percentage");
+		
+		discount.setDiscountPercentage(0.9f);
+		
+		newContainer.addDiscount(discount);
+		
+		customer.setDiscount(discount);
+		
+		
+		SalesAssistant salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 69", "6969", 17);
+		
+		SalesAssistantContainer salesContainer = SalesAssistantContainer.getInstance();
+		
+		salesContainer.addSalesAssistant(salesAssistant);
 		
 	}
 }

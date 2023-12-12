@@ -2,6 +2,7 @@ package tui;
 
 import java.util.Scanner;
 import controller.OrderController;
+import controller.ProductController;
 import controller.CustomerController;
 import controller.SalesAssistantController;
 import model.order.Order;
@@ -9,12 +10,14 @@ import model.order.Order;
 public class OrderMenu {
     private OrderController orderController;
     private CustomerController customerController;
+    private ProductController productController;
     private SalesAssistantController salesAssistantController;
     
     private Scanner scanner;
     private Order currentOrder;
 
     public OrderMenu() {
+    	this.productController = new ProductController();
         this.orderController = new OrderController();
         this.customerController = new CustomerController();
         this.scanner = new Scanner(System.in);
@@ -79,25 +82,39 @@ public class OrderMenu {
         boolean hasAdded = false;
         
         while(!isCompleted) {
-        	String message = "Indtast produkt barcode";
+        	String message = "Indtast produkt barcode ";
         	if(hasAdded) {
         		message += "eller tast \"0\" for at bekræfte";
-        		System.out.println(currentOrder.getInfo());
+        		for(String string : currentOrder.getInfo()) {
+        			System.out.println(string);
+        		}
+        		System.out.println();
         	} 
         	else {
         		message +=  "eller tast \"0\" for at afslutte";
         	}
-        	
-        	System.out.println(message);
+           	System.out.println(message);
+           	
         	int input = getIntFromUser();
         	if(input == 0) {
         		isCompleted = true;
+        		if(hasAdded) {
+        			confirmOrder(currentOrder);
+        		}
         	}
         	else {
         		System.out.println();
             	int barcode = input;
+            	
             	System.out.println("Indtast antal");
             	int quantity = getIntFromUser();
+            	
+            	// Check quantity
+    	
+            	while(!productController.isValidAmount(barcode, quantity) || quantity == 0) {
+            		System.out.println("Antallet er ugyldigt, skal være over 0 og under " + productController.getStockAmount(barcode));
+            		quantity = getIntFromUser();
+            	}
             	
             	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
             		System.out.println("Produkt tilføjet");
@@ -111,13 +128,23 @@ public class OrderMenu {
         
     }
  
-    
-    
-    
     public void addProductBySerialNo(int serialNo) {
     	//addProductBySerialNo();
     }
     public void confirmOrder(Order order) {
-    	//confirmOrder();
+    	if(orderController.confirmOrder(order)) {
+    		System.out.println("Bekræfter ordre...");
+    		
+    		for(String s : order.getInfo()) {
+        		System.out.println(s);
+        	}
+    		
+    		System.out.println("Ordre er gemt");
+    		
+    	}
+    	else {
+    		System.out.println("Noget gik galt");
+    	}
+    	System.out.println();
     }
 }

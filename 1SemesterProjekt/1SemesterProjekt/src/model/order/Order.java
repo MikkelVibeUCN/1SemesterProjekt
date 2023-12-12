@@ -1,14 +1,17 @@
 package model.order;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import model.product.UniqueCopy;
 import model.product.Product;
+import model.product.ShelfProduct;
 import model.Customer;
 import model.SalesAssistant;
 
 public class Order {
 	private Customer customer;
 	private SalesAssistant salesAssistant;
+	DecimalFormat formatter = new DecimalFormat("0.00");
 	private int orderID;
 	private ArrayList<Product> copies;
 	private ArrayList<OrderLine> orderLines;
@@ -46,22 +49,59 @@ public class Order {
 		return orderID;
 	}
 	
-	public String getInfo() {
-		String result = "ID af ordren: " + orderID + ", total price:  ";
-		for(OrderLine orderLine : orderLines) {
-			result += "Barcode: " + orderLine.getProduct().getBarcode() + " Price:" + orderLine.getProduct().getPrice();
+	public boolean hasProduct(Product product) {
+		boolean result = false;
+		if(findOrderLineFromProduct(product) != null) {
+			result = true;
 		}
+		return result;
+	}
+	
+	public OrderLine findOrderLineFromProduct(Product product) {
+		OrderLine result = null;
+		int i = -1;
+		boolean found = false;
+		while(!found && ++i < orderLines.size()) {
+			Product currentProduct = orderLines.get(i).getProduct();
+			if(product.equals(currentProduct)) {
+				result = orderLines.get(i);
+				found = true;
+			}
+		}
+		return result;
+		
+	}
+	
+	public ArrayList<String> getInfo() {
+		ArrayList<String> result = new ArrayList<>();
+		result.add("ID af ordren: " + orderID);
+		
+		for(OrderLine orderLine : orderLines) {			
+			result.add("Navn: " + orderLine.getProduct().getName() + 
+					", stregkode: " + orderLine.getProduct().getBarcode() + 
+					", pris: " + orderLine.getProduct().getPrice() + 
+					", aktuel pris: " + formatter.format(withDiscount(orderLine.getProduct().getPrice())) +
+					", antal: " + orderLine.getQuantity() +
+					", subtotal: " + formatter.format(withDiscount(orderLine.getSubTotal())));
+				
+		}
+		result.add("Total " + formatter.format(totalPrice()));
+		
+		result.add("Ekspederet af: " + salesAssistant.getName());
+		
 		return result;
 	}
 	
 	public double totalPrice() {
 		double result = 0;
-		
 		for(OrderLine orderLine : orderLines) {
-			result += orderLine.getSubTotal();
+			result += withDiscount(orderLine.getSubTotal());
 		}
-		
-		return customer.getDiscount().calculatePrice(result);
+		return result;
+	}
+	
+	public double withDiscount(double amount) {
+		return customer.getDiscount().calculatePrice(amount);
 	}
 	
 }

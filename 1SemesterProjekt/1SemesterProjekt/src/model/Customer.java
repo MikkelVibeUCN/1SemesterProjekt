@@ -13,7 +13,7 @@ public class Customer extends Person implements Comparable<Customer> {
 		id = ++count;
 	}
 	
-	public void addDiscount(Discount discount) {
+	public void setDiscount(Discount discount) {
 		this.discount = discount;
 	}
 	

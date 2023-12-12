@@ -10,7 +10,7 @@ public class DiscountContainer {
 		discounts = new ArrayList<>();
 	}
 	
-	public DiscountContainer getInstance() {
+	public static DiscountContainer getInstance() {
 		if(instance == null) {
 			instance = new DiscountContainer();
 		}
@@ -32,4 +32,8 @@ public class DiscountContainer {
 		
 		return result;
  	}
+	
+	public void addDiscount(Discount discount) {
+		discounts.add(discount);
+	}
 }
