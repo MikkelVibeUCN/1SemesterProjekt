@@ -52,16 +52,6 @@ public class OrderMenu {
     	return scanner.nextInt();
     }
     
-    public String getIntFromUserEnterCheck() {
-    	String nextString = scanner.nextLine();
-    	
-    	while(!scanner.hasNextInt() || !nextString.equals("")) {
-    		System.out.println("Inpput skal være et tal");
-    		nextString = scanner.nextLine();
-    	}
-    	return nextString;
-    }
-    
     public void createOrder() {
     	currentOrder = orderController.createOrder(1);
     	System.out.println("Ordre oprettet");
@@ -122,8 +112,6 @@ public class OrderMenu {
     }
     
     public void addProduct() {
-    	System.out.println("");
-    	
     	boolean isCompleted = false;
         
         while(!isCompleted) {
@@ -147,12 +135,14 @@ public class OrderMenu {
         		System.out.println();
             	int barcode = input;
             	
-            	System.out.println("Tast serienummer eller tryk \"enter\" for at fortsætte");
+            	System.out.println("Tast serienummer eller tryk \"0\" for at fortsætte");
             	
-            	String nextInput = getIntFromUserEnterCheck();
+            	scanner.nextLine();
             	
-            	if(!nextInput.equals("")) {
-            		addProductBySerialNo(barcode, Integer.parseInt(nextInput));
+            	input = getIntFromUser();
+            	
+            	if(input != 0) {
+            		addProductBySerialNo(barcode, input);
             	}
             	else {
             		addProductByBarcode(barcode);

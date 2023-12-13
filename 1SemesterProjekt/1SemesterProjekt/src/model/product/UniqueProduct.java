@@ -20,9 +20,9 @@ public class UniqueProduct extends Product{
 	
 	public UniqueCopy findCopy(int serialNo) {
 		UniqueCopy result = null;
-		int i = 0;
+		int i = -1;
 		boolean found = false;
-		while(!found && i++ < copies.size()) {
+		while(!found && ++i < copies.size()) {
 			UniqueCopy currentCopy = copies.get(i);
 			if(currentCopy.getSerialNumber() == serialNo) {
 				found = true;
