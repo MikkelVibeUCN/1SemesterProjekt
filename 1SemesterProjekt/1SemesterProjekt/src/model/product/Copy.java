@@ -3,17 +3,17 @@ package model.product;
 public abstract class Copy {
 	private String location;
 	private String state;
-	private int serialNumber;
+	private int serialNo;
 	
 	
-	public Copy(String location, String state, int serialNumber) {
+	public Copy(String location, String state, int serialNo) {
 		this.location = location;
 		this.state = state;
-		this.serialNumber = serialNumber;
+		this.serialNo = serialNo;
 	}
 	
-	public int getSerialNumber() {
-		return serialNumber;
+	public int getSerialNo() {
+		return serialNo;
 	}
 	
 	public abstract Product getOrigin();
