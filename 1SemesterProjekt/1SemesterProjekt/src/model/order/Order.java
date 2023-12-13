@@ -121,7 +121,7 @@ public class Order {
 		
 		return "Navn: " + product.getName() + 
 				", stregkkode: " + product.getBarcode() +
-				", serienummer: " + copy.getSerialNumber() +
+				", serienummer: " + copy.getSerialNo() +
 				priceString + 
 				priceAfterDiscountString;
 	}
