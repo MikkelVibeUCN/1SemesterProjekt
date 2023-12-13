@@ -62,7 +62,7 @@ public class OrderMenu {
     	String phoneNo = scanner.next();
     	
     	if(orderController.findCustomer(phoneNo) != null) {
-    		orderController.addCustomerToOrder(phoneNo, currentOrder);
+    		orderController.addCustomerToOrder(phoneNo);
         	System.out.println("Kunde er tilføjet til ordren");
     	}
     	else {
@@ -103,16 +103,14 @@ public class OrderMenu {
             	System.out.println("Indtast antal");
             	int quantity = getIntFromUser();
             	
-            	// Check quantity
-    	
-            	while(!orderController.isValidAmount(barcode, quantity) || quantity == 0) {
-            		System.out.println("Antallet er ugyldigt, skal være over 0 og under " + orderController.getStockAmount(barcode));
+            	while(quantity <= 0) {
+            		System.out.println("Antallet er ugyldigt, skal være over 0");
             		quantity = getIntFromUser();
             	}
             	
-            	orderController.removeStock(barcode, quantity);
+            	System.out.println(orderController.stockMessage(barcode, quantity));
             	
-            	if(orderController.addProductByBarcode(quantity, barcode, currentOrder)) {
+            	if(orderController.addProductByBarcode(quantity, barcode)) {
             		System.out.println("Produkt tilføjet");
             		hasAdded = true;
             	}
@@ -128,7 +126,7 @@ public class OrderMenu {
     	//addProductBySerialNo();
     }
     public void confirmOrder(Order order) {
-    	if(orderController.confirmOrder(order)) {
+    	if(orderController.confirmOrder()) {
     		System.out.println("Bekræfter ordre...");
     		
     		for(String s : order.getInfo()) {

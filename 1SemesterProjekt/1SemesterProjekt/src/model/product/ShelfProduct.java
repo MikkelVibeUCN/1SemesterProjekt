@@ -6,6 +6,7 @@ public class ShelfProduct extends Product{
 	private int minimumStock;
 	private int maximumStock;
 	private int stockAmount;
+	private int reservedAmount;
 	private String productGroup;
 	
 	public ShelfProduct (String name, double minimumPrice, double price, String SKU, int barcode, int minimumStock, int maximumStock, int stockAmount, String productGroup){
@@ -16,14 +17,25 @@ public class ShelfProduct extends Product{
 		this.maximumStock = maximumStock;
 		this.stockAmount = stockAmount;
 		this.productGroup = productGroup;
+		this.reservedAmount = 0;
 	}
 	
 	public int getStockAmount() {
 		return stockAmount;
 	}
 	
+	private void addReservedAmount(int amount) {
+		reservedAmount += amount;
+	}
+	
 	public void removeStock(int amount) {
-		stockAmount -= amount; 
+		if(amount > stockAmount) {
+			addReservedAmount(amount - stockAmount);
+			stockAmount = 0;
+		} 
+		else {
+			stockAmount -= amount; 
+		}
 	}
 	
 	public void addStock(int amount) {
