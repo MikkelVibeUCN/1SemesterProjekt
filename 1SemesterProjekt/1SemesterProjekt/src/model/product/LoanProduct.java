@@ -18,7 +18,7 @@ public class LoanProduct extends Product {
 		boolean found = false;
 		while(!found && i++ < copies.size()) {
 			LoanCopy currentCopy = copies.get(i);
-			if(currentCopy.getSerialNumber() == serialNo) {
+			if(currentCopy.getSerialNo() == serialNo) {
 				found = true;
 				result = currentCopy;
 			}

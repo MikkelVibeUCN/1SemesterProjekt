@@ -24,7 +24,7 @@ public class UniqueProduct extends Product{
 		boolean found = false;
 		while(!found && ++i < copies.size()) {
 			UniqueCopy currentCopy = copies.get(i);
-			if(currentCopy.getSerialNumber() == serialNo) {
+			if(currentCopy.getSerialNo() == serialNo) {
 				found = true;
 				result = currentCopy;
 			}
