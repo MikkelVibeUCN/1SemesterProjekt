@@ -20,13 +20,12 @@ public class OrderContainer {
 	}
 	
 	public boolean addOrder(Order order) {
-		try{
+		boolean result = false;
+		if(order.getOrderLines().size() > 0) {
 			orders.add(order);
-			return true;
+			result = true;
 		}
-		catch(Exception e) {
-			return false;
-		}
+		return result;
 	}
 	
 	public Order findOrder(int orderID) {

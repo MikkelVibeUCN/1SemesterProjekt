@@ -18,4 +18,21 @@ public class UniqueProduct extends Product{
 		copies = new ArrayList<>();
 	}
 	
+	public UniqueCopy findCopy(int serialNo) {
+		UniqueCopy result = null;
+		int i = 0;
+		boolean found = false;
+		while(!found && i++ < copies.size()) {
+			UniqueCopy currentCopy = copies.get(i);
+			if(currentCopy.getSerialNumber() == serialNo) {
+				found = true;
+				result = currentCopy;
+			}
+		}
+		return result;
+	}
+	
+	public void addCopy(UniqueCopy copy) {
+		copies.add(copy);
+	}
 }

@@ -6,6 +6,8 @@ import model.*;
 import model.product.Product;
 import model.product.ProductContainer;
 import model.product.ShelfProduct;
+import model.product.UniqueCopy;
+import model.product.UniqueProduct;
 
 public class TryMe {
 	public static int randomBarcode() {
@@ -48,6 +50,16 @@ public class TryMe {
 			 ShelfProduct newProduct = new ShelfProduct("test", (double)200, (double)200, "product-swag", randomBarcode(), 200, 500, 300, "group 1");
 			 productContainer.addProduct(newProduct);	 
 		}
+		UniqueProduct prod = new UniqueProduct("seje", (double)200, (double)300, "product-inside", 100, 200, 140, 1234567);
+		productContainer.addProduct(prod);
+		
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456781, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456782, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456783, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456784, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456785, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456786, prod));
+		prod.addCopy(new UniqueCopy("somewhere", "available", 123456787, prod));
 		
 		for(Product product : productContainer.getProducts()) {
 			System.out.println(product.getBarcode());
@@ -82,6 +94,8 @@ public class TryMe {
 		SalesAssistantContainer salesContainer = SalesAssistantContainer.getInstance();
 		
 		salesContainer.addSalesAssistant(salesAssistant);
+		
+		
 		
 	}
 }

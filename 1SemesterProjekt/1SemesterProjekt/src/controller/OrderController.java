@@ -1,11 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Customer;
 import model.order.Order;
 import model.order.OrderContainer;
 import model.order.OrderLine;
+import model.product.LoanCopy;
+import model.product.LoanProduct;
 import model.product.Product;
 import model.product.ShelfProduct;
+import model.product.UniqueCopy;
+import model.product.UniqueProduct;
 
 public class OrderController {
 	private Order currentOrder;
@@ -26,13 +32,13 @@ public class OrderController {
 		return currentOrder;
 	}
 	
-	public boolean addCustomerToOrder(String phoneNo) {
-		boolean result = false;
+	public String addCustomerToOrder(String phoneNo) {
+		String result = "Kunde eksisterer ikke";
 		Customer customer = customerController.findCustomer(phoneNo);
 		if(customer != null) {
 			currentOrder.addCustomer(customer);
-			result = true;
-		}
+        	result = "Kunde er tilføjet til ordren";
+    	}
 		return result;
 	}
 	
@@ -52,6 +58,26 @@ public class OrderController {
 			result = true;
 		}
 		return result;
+	}
+	
+	public boolean addProductBySerialNo(int barcode, int serialNo) {
+		boolean result = false;
+		
+		Product product = productController.findProduct(barcode);
+		
+		if(product instanceof UniqueProduct) {
+			UniqueCopy copy = ((UniqueProduct) product).findCopy(serialNo);
+			
+			result = currentOrder.addCopyToOrder(copy);	
+		}
+		else if (product instanceof LoanProduct) {
+			LoanCopy copy = ((LoanProduct) product).findCopy(serialNo);
+			
+			result = currentOrder.addCopyToOrder(copy);	
+		}
+		
+		return result;
+		
 	}
 	
 	public boolean confirmOrder() {
@@ -84,5 +110,21 @@ public class OrderController {
 			productController.removeStock(barcode, amount);
 		}
 		return result + "\n";
+	}
+	
+	public String introMessage() {
+		String message = "Indtast produkt barcode ";
+		
+		if(currentOrder.getOrderLines().size() > 0) {
+			message += "eller tast \"0\" for at bekræfte";
+		} 
+		else {
+			message += "eller tast \"0\" for at afslutte";
+		}
+		return message;
+	}
+	
+	public ArrayList<String> orderInfoMessages() {
+		return currentOrder.getInfo();
 	}
 }

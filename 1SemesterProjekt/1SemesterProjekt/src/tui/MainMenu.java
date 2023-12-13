@@ -63,7 +63,6 @@ public class MainMenu {
                     System.out.println("Ugyldigt valg");
             }
         }
-
         scanner.close();
     }
 

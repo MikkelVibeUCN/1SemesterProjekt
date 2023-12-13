@@ -31,7 +31,7 @@ public class OrderMenu {
             case 1:
                 createOrder();
                 addCustomerToOrder(); 
-                addProductByBarcode();
+                addProduct();
                 break;
             case 2:
             	//
@@ -52,6 +52,16 @@ public class OrderMenu {
     	return scanner.nextInt();
     }
     
+    public String getIntFromUserEnterCheck() {
+    	String nextString = scanner.nextLine();
+    	
+    	while(!scanner.hasNextInt() || !nextString.equals("")) {
+    		System.out.println("Inpput skal være et tal");
+    		nextString = scanner.nextLine();
+    	}
+    	return nextString;
+    }
+    
     public void createOrder() {
     	currentOrder = orderController.createOrder(1);
     	System.out.println("Ordre oprettet");
@@ -61,84 +71,93 @@ public class OrderMenu {
     	System.out.println("Indtast telefonnummer på kunde");
     	String phoneNo = scanner.next();
     	
-    	if(orderController.findCustomer(phoneNo) != null) {
-    		orderController.addCustomerToOrder(phoneNo);
-        	System.out.println("Kunde er tilføjet til ordren");
-    	}
-    	else {
-    		System.out.println("Kunde eksisterer ikke");
-    	}
+    	System.out.println(orderController.addCustomerToOrder(phoneNo));
     }
     
-    public void addProductByBarcode() {
-        boolean isCompleted = false;
-        boolean hasAdded = false;
+    public void addProductByBarcode(int barcode) {
+    	System.out.println("Indtast antal");
+    	int quantity = getIntFromUser();
+    	
+    	while(quantity <= 0) {
+    		System.out.println("Antallet er ugyldigt, skal være over 0");
+    		quantity = getIntFromUser();
+    	}
+    	
+    	System.out.println(orderController.stockMessage(barcode, quantity));
+    	
+    	if(orderController.addProductByBarcode(quantity, barcode)) {
+    		System.out.println("Produkt tilføjet");
+    	}
+    	else {
+    		System.out.println("Produkt eksisterer ikke");
+    	}
+    }
+ 
+    public void addProductBySerialNo(int barcode, int serialNo) {   	
+    	if(orderController.addProductBySerialNo(barcode, serialNo)) {
+    		System.out.println("Produkt tilføjet");
+    	}
+    	else {
+    		System.out.println("Produkt eksisterer ikke");
+    	}     
+    }
+    
+    public boolean confirmOrder(Order order) {
+    	boolean result = orderController.confirmOrder();
+    	
+    	if(result) {
+    		System.out.println("Bekræfter ordre...");
+    		
+    		for(String s : order.getInfo()) {
+        		System.out.println(s);
+        	}
+    		System.out.println("Ordre er gemt");
+    	}
+    	else {
+    		System.out.println("Noget gik galt");
+    	}
+    	System.out.println();
+    	
+    	return result;
+    }
+    
+    public void addProduct() {
+    	System.out.println("");
+    	
+    	boolean isCompleted = false;
         
         while(!isCompleted) {
-        	String message = "Indtast produkt barcode ";
-        	if(hasAdded) {
-        		message += "eller tast \"0\" for at bekræfte";
-        		for(String string : currentOrder.getInfo()) {
-        			System.out.println(string);
-        		}
-        		System.out.println();
-        	} 
-        	else {
-        		message +=  "eller tast \"0\" for at afslutte";
-        	}
-           	System.out.println(message);
+        	for(String string : currentOrder.getInfo()) {
+    			System.out.println(string);
+    		}
+        	System.out.println(orderController.introMessage());
            	
         	int input = getIntFromUser();
         	if(input == 0) {
         		isCompleted = true;
         		
-        		if(hasAdded) {
-        			confirmOrder(currentOrder);
+        		if(confirmOrder(currentOrder)) {
+        			System.out.println("Ordre bekræftet");
+        		}
+        		else {
+        			System.out.println("Et eller andet gik galt, prøv igen");
         		}
         	}
         	else {
         		System.out.println();
             	int barcode = input;
             	
-            	System.out.println("Indtast antal");
-            	int quantity = getIntFromUser();
+            	System.out.println("Tast serienummer eller tryk \"enter\" for at fortsætte");
             	
-            	while(quantity <= 0) {
-            		System.out.println("Antallet er ugyldigt, skal være over 0");
-            		quantity = getIntFromUser();
-            	}
+            	String nextInput = getIntFromUserEnterCheck();
             	
-            	System.out.println(orderController.stockMessage(barcode, quantity));
-            	
-            	if(orderController.addProductByBarcode(quantity, barcode)) {
-            		System.out.println("Produkt tilføjet");
-            		hasAdded = true;
+            	if(!nextInput.equals("")) {
+            		addProductBySerialNo(barcode, Integer.parseInt(nextInput));
             	}
             	else {
-            		System.out.println("Produkt eksisterer ikke");
-            	}
+            		addProductByBarcode(barcode);
+            	}           	
         	}
         }
-        
-    }
- 
-    public void addProductBySerialNo(int serialNo) {
-    	//addProductBySerialNo();
-    }
-    public void confirmOrder(Order order) {
-    	if(orderController.confirmOrder()) {
-    		System.out.println("Bekræfter ordre...");
-    		
-    		for(String s : order.getInfo()) {
-        		System.out.println(s);
-        	}
-    		
-    		System.out.println("Ordre er gemt");
-    		
-    	}
-    	else {
-    		System.out.println("Noget gik galt");
-    	}
-    	System.out.println();
     }
 }

@@ -1,15 +1,14 @@
 package model.product;
 
-public class LoanCopy {
-	private int barcode;
-	private String location;
-	private String state;
-	private int serialNumber;
+public class LoanCopy extends Copy {
+	private LoanProduct originProduct;
 	
-	public LoanCopy(int barcode, String location, String state, int serialNumber) {
-		this.barcode = barcode;
-		this.location = location;
-		this.state = state;
-		this.serialNumber = serialNumber;
+	public LoanCopy(String location, String state, int serialNumber, LoanProduct originProduct) {
+		super(location, state , serialNumber);
+		this.originProduct = originProduct;
+	}
+	
+	public Product getOrigin() {
+		return originProduct;
 	}
 }
