@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SalesAssistantContainer {
 	private ArrayList<SalesAssistant> salesAssistants;
@@ -48,29 +49,4 @@ public class SalesAssistantContainer {
 	public void addSalesAssistant(SalesAssistant salesAssistant) {
 		salesAssistants.add(salesAssistant);
 	}
-	
-//	public void addSalesAssistant(SalesAssistant salesAssistant) {
-//		boolean found = false;
-//		int i = -1;
-//		while(!found && ++i <= salesAssistants.size()) {
-//			if(salesAssistants.size() > 0 && i == salesAssistants.size()) {
-//				SalesAssistant currentSalesAssistant = salesAssistants.get(i);
-//				int id = currentSalesAssistant.getID();
-//
-//				if(i == 0 && salesAssistant.getID() < id) {
-//					salesAssistants.add(0, salesAssistant);
-//					found = true;
-//				}
-//				else if(salesAssistants.get(i-1).getID() > salesAssistant.getID() && salesAssistant.getID() > id) {
-//					salesAssistants.add(i, salesAssistant);
-//					found = true;
-//				}
-//			}
-//			else {
-//				salesAssistants.add(salesAssistant);
-//				found = true;
-//			}	
-//		}
-//	}
-	
 }

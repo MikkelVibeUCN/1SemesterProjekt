@@ -2,8 +2,6 @@ package model.product;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.Random;
-
 
 public class ProductContainer {
 	private ArrayList<Product> products;
@@ -29,7 +27,7 @@ public class ProductContainer {
 	
 	public void addProduct(Product product) {
 		products.add(product);
-		insertionSort();
+		insertionSortLast();
 	}
 	
 	public Product findProduct(int barcode) {
@@ -56,20 +54,32 @@ public class ProductContainer {
 		return result;
 	}
 	
-	public void insertionSort() {
-		
-		for(int i = 0; i < products.size() && products.size() > 1 && i != products.size()-1; i++) {
-			int variableIndex = i;
+//	public void insertionSortAll() {
+//		for(int i = 0; i < products.size() && products.size() > 1 && i != products.size()-1; i++) {
+//			int variableIndex = i;
+//			
+//			while(products.get(variableIndex).compareTo(products.get(variableIndex+1)) > 0 ) {
+//				Collections.swap(products, variableIndex, variableIndex+1);
+//				
+//				if(i > 0 && variableIndex-1 > 0) {
+//					variableIndex--;
+//				} 
+//			}
+//		}
+//	}
+
+	
+	private void insertionSortLast() {
+		if(products.size() > 1) {
+			int variableIndex = products.size()-2;
 			
-			while(products.get(variableIndex).getBarcode() > products.get(variableIndex+1).getBarcode()) {
+			while(products.get(variableIndex).compareTo(products.get(variableIndex+1)) > 0 ) {
 				Collections.swap(products, variableIndex, variableIndex+1);
 				
-				if(i > 0 && variableIndex-1 > 0) {
+				if(variableIndex-1 > 0) {
 					variableIndex--;
 				} 
 			}
 		}
-		
-		
 	}
 }

@@ -23,7 +23,7 @@ public class CustomerContainer {
 	
 	public void addCustomer(Customer customer) {
 		customers.add(customer);
-		Collections.sort(customers);
+		insertionSortLast();
 	}
 	
 	public Customer findCustomer(String phoneNo) {
@@ -49,5 +49,19 @@ public class CustomerContainer {
 			}
 		}
 		return result;
+	}
+	
+	private void insertionSortLast() {
+		if(customers.size() > 1) {
+			int variableIndex = customers.size()-2;
+			
+			while(customers.get(variableIndex).compareTo(customers.get(variableIndex+1)) > 0 ) {
+				Collections.swap(customers, variableIndex, variableIndex+1);
+				
+				if(variableIndex-1 > 0) {
+					variableIndex--;
+				} 
+			}
+		}
 	}
 }

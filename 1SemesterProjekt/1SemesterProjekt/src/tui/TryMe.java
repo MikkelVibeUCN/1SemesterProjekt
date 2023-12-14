@@ -61,9 +61,9 @@ public class TryMe {
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456786, prod));
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456787, prod));
 		
-		for(Product product : productContainer.getProducts()) {
-			System.out.println(product.getBarcode());
-		}
+//		for(Product product : productContainer.getProducts()) {
+//			System.out.println(product.getBarcode());
+//		}
 		
 		productContainer.addProduct(new ShelfProduct("test1", (double)200, (double)200, "product-swag", 123456, 200, 500, 300, "group 1"));
 		
