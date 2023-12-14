@@ -53,6 +53,9 @@ public class Order {
 		return orderID;
 	}
 	
+	public int getSalesAssistantID() {
+		return salesAssistant.getID();
+	}
 	public ArrayList<OrderLine> getOrderLines() {
 		return orderLines;
 	}
