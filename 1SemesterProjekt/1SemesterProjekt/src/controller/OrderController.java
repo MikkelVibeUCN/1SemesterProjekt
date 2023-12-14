@@ -49,7 +49,7 @@ public class OrderController {
 			if(currentOrder.hasProduct(product)) {
 				OrderLine orderLine = currentOrder.findOrderLineFromProduct(product);
 				if(orderLine != null) {
-					orderLine.addQuantity(quantity);
+					currentOrder.addQuantityToOrderLine(orderLine, quantity);
 				}
 			}
 			else {

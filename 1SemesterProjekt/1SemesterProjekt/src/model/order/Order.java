@@ -61,7 +61,7 @@ public class Order {
 		boolean result = false;
 		if(findOrderLineFromProduct(product) != null) {
 			result = true;
-		}
+		}	
 		return result;
 	}
 	
@@ -77,7 +77,6 @@ public class Order {
 			}
 		}
 		return result;
-		
 	}
 	
 	public ArrayList<String> getInfo() {
@@ -136,5 +135,9 @@ public class Order {
 	
 	public double withDiscount(double amount) {
 		return customer.getDiscount().calculatePrice(amount);
+	}
+	
+	public void addQuantityToOrderLine(OrderLine orderLine, int amount) {
+		orderLine.addQuantity(amount);
 	}
 }

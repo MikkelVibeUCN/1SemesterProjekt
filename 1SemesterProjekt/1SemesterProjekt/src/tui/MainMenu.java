@@ -16,8 +16,6 @@ public class MainMenu {
 		this.productMenu = new ProductMenu();
 		this.customerMenu = new CustomerMenu();
 		this.salesAssistantMenu = new SalesAssistantMenu();
-		
-	
 	}
 
     public void run() {
