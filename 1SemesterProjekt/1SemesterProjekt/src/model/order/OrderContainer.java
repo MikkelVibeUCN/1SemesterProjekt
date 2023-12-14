@@ -28,6 +28,11 @@ public class OrderContainer {
 		return result;
 	}
 	
+	/**
+	 * findOrder() finds a specific order object by performing binary search
+	 * @param orderID, The ID of the order to look for
+	 * @return The specific object or null if it is not found
+	 */
 	public Order findOrder(int orderID) {
 		Order result = null; 
 		

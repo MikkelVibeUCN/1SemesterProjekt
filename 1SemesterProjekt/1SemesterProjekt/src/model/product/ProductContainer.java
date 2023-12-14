@@ -30,6 +30,11 @@ public class ProductContainer {
 		insertionSortLast();
 	}
 	
+	/**
+	 * findProduct() finds a specific product object by performing binary search
+	 * @param barcode, the barcode of the customer to find.
+	 * @return The specific product or null if it is not found.
+	 */
 	public Product findProduct(int barcode) {
 		Product result = null; 
 		
@@ -68,7 +73,10 @@ public class ProductContainer {
 //		}
 //	}
 
-	
+	/**
+	 * insertionSortLast sorts the last element by using insertion sort on the products array according to compareTo()
+	 * @return void
+	 */
 	private void insertionSortLast() {
 		if(products.size() > 1) {
 			int variableIndex = products.size()-2;
