@@ -1,7 +1,11 @@
 package controller;
-import model.*;
 import model.product.*;
-import tui.MainMenu;
+
+
+/**
+ * ProductController handles everything to do with products
+ * @author gruppe-1
+ */
 
 public class ProductController {
 	private ProductContainer productContainer;
@@ -10,6 +14,11 @@ public class ProductController {
 		productContainer = ProductContainer.getInstance();
 	}
 	
+	/**
+	 * getStockAmount() finds the stock amount of a specific product
+	 * @param barcode, the barcode of the specific product.
+	 * @return int containing the amount in stock, returns -1 if the product isn't found
+	 */
 	public int getStockAmount(int barcode) {
 		int result = -1;
 		Product product = findProduct(barcode);
@@ -19,6 +28,11 @@ public class ProductController {
 		return result;
 	}
 	
+	/**
+	 * removeStock removes stock from a specific product.
+	 * @param barcode, the barcode of the specific product
+	 * @return String containing the message to print to the user.
+	 */
 	public boolean removeStock(int barcode, int amount) {
 		boolean result = false;
 		Product product = findProduct(barcode);

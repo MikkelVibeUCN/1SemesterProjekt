@@ -7,6 +7,7 @@ import java.util.Collections;
 
 public class ProductContainer {
 	private ArrayList<Product> products;
+	private ArrayList<Product> productsBarcodeDescending;
 	private static final int START_SIZE = 28000;
 	private static ProductContainer instance;
 	
@@ -19,6 +20,7 @@ public class ProductContainer {
 	
 	private ProductContainer() {
 		products = new ArrayList<>(START_SIZE);
+		productsBarcodeDescending = new ArrayList<>(products.size());
 	}
 	
 	public ArrayList<Product> getProducts() {
@@ -27,7 +29,7 @@ public class ProductContainer {
 	
 	public void addProduct(Product product) {
 		products.add(product);
-		Collections.sort(products);
+		insertionSort();
 	}
 	
 	public Product findProduct(int barcode) {
@@ -52,5 +54,22 @@ public class ProductContainer {
 			}
 		}
 		return result;
+	}
+	
+	public void insertionSort() {
+		
+		for(int i = 0; i < products.size() && products.size() > 1 && i != products.size()-1; i++) {
+			int variableIndex = i;
+			
+			while(products.get(variableIndex).getBarcode() > products.get(variableIndex+1).getBarcode()) {
+				Collections.swap(products, variableIndex, variableIndex+1);
+				
+				if(i > 0 && variableIndex-1 > 0) {
+					variableIndex--;
+				} 
+			}
+		}
+		
+		
 	}
 }
