@@ -38,9 +38,9 @@ public class OrderContainer {
 		
 		boolean found = false;
 		int start = 0;
-		int end = orders.size();
+		int end = orders.size()-1;
 		int middle = orders.size()/2;
-		while(!found) {
+		while(!found && middle != end) {
 			if(orders.get(middle).getID() == orderID) {
 				result = orders.get(middle);
 				found = true;

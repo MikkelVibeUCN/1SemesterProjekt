@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import model.Customer;
+import tui.MainMenu;
 
 public class CustomerContainer {
 	private ArrayList<Customer> customers;
@@ -35,6 +36,7 @@ public class CustomerContainer {
 	public Customer findCustomer(String phoneNo) {
 		Customer result = null; 
 		
+		
 		boolean found = false;
 		int start = 0;
 		int end = customers.size()-1;
@@ -56,6 +58,7 @@ public class CustomerContainer {
 		}
 		return result;
 	}
+	
 	
 	/**
 	 * insertionSortLast sorts the last element by using insertion sort on the customers array according to compareTo()
