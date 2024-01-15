@@ -40,7 +40,7 @@ public class ProductContainer {
 		
 		boolean found = false;
 		int start = 0;
-		int end = products.size()-1;
+		int end = products.size();
 		int middle = products.size()/2;
 		while(!found && middle != end) {
 			if(products.get(middle).getBarcode() == barcode) {

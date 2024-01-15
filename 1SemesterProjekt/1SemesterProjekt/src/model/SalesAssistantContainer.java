@@ -27,7 +27,7 @@ public class SalesAssistantContainer {
 		
 		boolean found = false;
 		int start = 0;
-		int end = salesAssistants.size()-1;
+		int end = salesAssistants.size();
 		int middle = salesAssistants.size()/2;
 		while(!found && middle != end) {
 			if(salesAssistants.get(middle).getID() == employeeID) {

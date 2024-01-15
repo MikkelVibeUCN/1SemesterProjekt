@@ -50,6 +50,7 @@ public class MainMenu {
                 case 4:
                 	//
                 	salesAssistantMenu.displayMenu();
+                	break;
                 case 666:
                 	TryMe.createTestData();
                 	break;
