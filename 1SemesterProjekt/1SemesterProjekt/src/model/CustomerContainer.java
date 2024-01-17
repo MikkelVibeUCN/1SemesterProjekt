@@ -39,7 +39,7 @@ public class CustomerContainer {
 		
 		boolean found = false;
 		int start = 0;
-		int end = customers.size()-1;
+		int end = customers.size();
 		int middle = customers.size()/2;
 		
 		while(!found && middle != end) {

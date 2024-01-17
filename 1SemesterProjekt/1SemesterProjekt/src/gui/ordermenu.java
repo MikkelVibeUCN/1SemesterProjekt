@@ -11,9 +11,15 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.CardLayout;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import controller.OrderController;
 
 public class ordermenu extends JFrame {
 
+	private OrderController orderController;
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
@@ -37,6 +43,8 @@ public class ordermenu extends JFrame {
 	 * Create the frame.
 	 */
 	public ordermenu() {
+		orderController = new OrderController();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -61,6 +69,12 @@ public class ordermenu extends JFrame {
 		panel_2.setLayout(new CardLayout(0, 0));
 		
 		JButton btnOrderCreate = new JButton("Opret ordre");
+		
+		btnOrderCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					createOrder();
+			}
+		});
 		panel_2.add(btnOrderCreate, "name_254181741858900");
 		
 		JButton btnFind = new JButton("Slet ordre");
@@ -76,5 +90,12 @@ public class ordermenu extends JFrame {
 		JButton btnOnlineOrder = new JButton("Online ordre");
 		panel_1.add(btnOnlineOrder);
 	}
-
+	
+	private void createOrder() {
+		this.setVisible(false);
+		
+		orderController.createOrder(1);
+		
+		new popup(orderController).setVisible(true);
+	}
 }

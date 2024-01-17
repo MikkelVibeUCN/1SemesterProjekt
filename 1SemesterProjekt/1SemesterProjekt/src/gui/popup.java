@@ -9,9 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import controller.OrderController;
+import controller.CustomerController;
 
 public class popup extends JDialog {
-
+	private OrderController orderController;
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
@@ -21,7 +27,7 @@ public class popup extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			popup dialog = new popup();
+			popup dialog = new popup(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -32,7 +38,9 @@ public class popup extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public popup() {
+	public popup(OrderController orderController) {
+		this.orderController = orderController;
+		
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -54,6 +62,11 @@ public class popup extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						addCustomerToOrder();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -65,5 +78,15 @@ public class popup extends JDialog {
 			}
 		}
 	}
-
+	
+	private void addCustomerToOrder() {
+		if(orderController.addCustomerToOrder(textField.getText())) {
+			setVisible(false);
+			
+			new orderinfo(orderController).setVisible(true);
+		}
+		else {
+			System.out.println("Customer not added successfully");
+		}
+	}
 }

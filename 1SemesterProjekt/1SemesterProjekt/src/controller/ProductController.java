@@ -43,7 +43,15 @@ public class ProductController {
 		return result;
 	}
 	
-	
+	public String getNameFromBarcode(int barcode) {
+		String result = null;
+		Product product = findProduct(barcode);
+		if(product != null) {
+			result = product.getName();
+		}
+		return result;
+		
+	}
 	
 	public Product findProduct(int barcode) {
 		return productContainer.findProduct(barcode);

@@ -1,5 +1,6 @@
 package gui;
 
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -10,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import tui.TryMe;
 
-public class mainpage extends JFrame {
+public class MainPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -20,10 +24,15 @@ public class mainpage extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		TryMe tryMe = new TryMe();
+		
+		tryMe.createTestData();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainpage frame = new mainpage();
+					MainPage frame = new MainPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +44,7 @@ public class mainpage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public mainpage() {
+	public MainPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,6 +62,11 @@ public class mainpage extends JFrame {
 		panel_2.setLayout(new CardLayout(0, 0));
 		
 		JButton btnOrderMenu = new JButton("Order menu");
+		btnOrderMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goOrderMenu();
+			}
+		});
 		panel_2.add(btnOrderMenu, "name_8201971681900");
 		
 		JButton btnCustomerMenu = new JButton("Kunde menu");
@@ -75,4 +89,9 @@ public class mainpage extends JFrame {
 		panel_1.add(lblNewLabel);
 	}
 
+	private void goOrderMenu() {
+		setVisible(false);
+		
+		new ordermenu().setVisible(true);
+	}	
 }

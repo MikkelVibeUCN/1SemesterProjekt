@@ -42,18 +42,17 @@ public class OrderController {
 		return currentOrder;
 	}
 	
-	
 	/**
 	 * addCustomerToOrder() adds a customer to the order
 	 * @param phoneNo, the phone number of the customer
 	 * @return String containing the message to print to the user.
 	 */
-	public String addCustomerToOrder(String phoneNo) {
-		String result = "Kunde eksisterer ikke";
+	public boolean addCustomerToOrder(String phoneNo) {
+		boolean result = false;
 		Customer customer = customerController.findCustomer(phoneNo);
 		if(customer != null) {
 			currentOrder.addCustomer(customer);
-        	result = "Kunde er tilføjet til ordren";
+        	result = true;
     	}
 		return result;
 	}
