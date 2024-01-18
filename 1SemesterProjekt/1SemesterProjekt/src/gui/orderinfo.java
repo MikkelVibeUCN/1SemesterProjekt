@@ -36,27 +36,11 @@ public class orderinfo extends JFrame {
 	private JPanel centerOfOL;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					orderinfo frame = new orderinfo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public orderinfo(OrderController orderController) {
 		productController = new ProductController();
-		orderController = orderController;
+		this.orderController = orderController;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
