@@ -81,6 +81,10 @@ public class OrderController {
 		return result;
 	}
 	
+	public Order getOrder() {
+		return currentOrder;
+	}
+	
 	/**
 	 * addProductBySerialNo() adds a unique item to the order
 	 * @param barcode, the barcode of the product.
@@ -114,8 +118,7 @@ public class OrderController {
 	public Customer findCustomer(String phoneNo) {
 		return customerController.findCustomer(phoneNo);
 	}
-	
-	
+
 	public int getStockAmount(int barcode) {
 		return productController.getStockAmount(barcode);
 	}

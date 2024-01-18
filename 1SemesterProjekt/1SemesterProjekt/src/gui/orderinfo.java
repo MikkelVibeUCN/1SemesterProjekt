@@ -19,10 +19,12 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import controller.OrderController;
 import controller.ProductController;
+import model.order.OrderLine;
 
 public class orderinfo extends JFrame {
 	private OrderController orderController;
@@ -35,12 +37,15 @@ public class orderinfo extends JFrame {
 	private JTextField textField_2;
 	private JPanel centerOfOL;
 
+	private ArrayList<OrderLinePanel> orderLinePanels;
+	
 	/**
 	 * Create the frame.
 	 */
 	public orderinfo(OrderController orderController) {
 		productController = new ProductController();
 		this.orderController = orderController;
+		orderLinePanels = new ArrayList<>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -130,7 +135,14 @@ public class orderinfo extends JFrame {
 			if(orderController.addProductByBarcode(quantity, barcode)) {
 				String name = productController.getNameFromBarcode(barcode);
 				
-				createOrderline(name, quantity);
+				if(orderLinePanelExists(name)) {
+					OrderLinePanel panel = getOrderLinePanelFromName(name);
+					panel.setQuantity(panel.getQuantity() + quantity);
+					panel.getOrderLinePanel().revalidate();
+				}
+				else {
+					createOrderline(name, quantity);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -138,24 +150,58 @@ public class orderinfo extends JFrame {
 		}
 	}
 
+	private OrderLinePanel getOrderLinePanelFromName(String name) {
+		OrderLinePanel result = null;
+		for(OrderLinePanel orderLinePanel : orderLinePanels) {
+			if(orderLinePanel.getName().equals(name)) {
+				result = orderLinePanel;
+			}
+		}
+		return result;
+	}
+	
+	private boolean orderLinePanelExists(String name) {
+		boolean result = false;
+		if(getOrderLinePanelFromName(name) != null) {
+			result = true;
+		}
+		return result;
+	}
+	
 	private void createOrderline(String name, int quantity) {
-		JPanel orderlinePane = new JPanel();
-		centerOfOL.add(orderlinePane);
-		orderlinePane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel orderlinePanel = new JPanel();
+		centerOfOL.add(orderlinePanel);
+		orderlinePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel orderlineLabel = new JLabel(name);
-		orderlinePane.add(orderlineLabel);
+		orderlinePanel.add(orderlineLabel);
 		
-		JLabel lblNewLabel = new JLabel("Antal:");
-		orderlinePane.add(lblNewLabel);
-		
-		textField_2 = new JTextField(quantity);
+		textField_2 = new JTextField(Integer.toString(quantity));
 		textField_2.setColumns(2);
-		orderlinePane.add(textField_2);
+		orderlinePanel.add(textField_2);
 		
 		JButton btnDelete = new JButton("Fjern");
 		btnDelete.setBackground(Color.RED);
-		orderlinePane.add(btnDelete);
+		
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deletePanel(getOrderLinePanelFromName(name));
+			}
+		});
+		orderlinePanel.add(btnDelete);
+		
+		orderlinePanel.revalidate();
+		
+		orderLinePanels.add(new OrderLinePanel(orderlinePanel, textField_2, name, quantity, orderLinePanels.size()));
 	}
-
+	
+	private void deletePanel(OrderLinePanel panel) {
+		JPanel currentJPanel = panel.getOrderLinePanel();
+		
+		//currentJPanel.removeAll();
+		this.remove(currentJPanel);
+		orderLinePanels.remove(panel);
+		this.revalidate();
+		this.repaint();
+	}
 }
