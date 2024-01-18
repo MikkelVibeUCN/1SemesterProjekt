@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -8,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,7 @@ import controller.CustomerController;
 
 public class popup extends JDialog {
 	private OrderController orderController;
+	private CustomerController customerController;
 	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -25,8 +28,9 @@ public class popup extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public popup(OrderController orderController) {
+	public popup(OrderController orderController, CustomerController customerController) {
 		this.orderController = orderController;
+		this.customerController = customerController;
 		
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -67,13 +71,18 @@ public class popup extends JDialog {
 	}
 	
 	private void addCustomerToOrder() {
-		if(orderController.addCustomerToOrder(textField.getText())) {
-			setVisible(false);
-			
-			new orderinfo(orderController).setVisible(true);
-		}
-		else {
-			System.out.println("Customer not added successfully");
-		}
+	    if (orderController.addCustomerToOrder(textField.getText())) {
+	        setVisible(false);
+	        
+	        new orderinfo(orderController).setVisible(true);
+	        
+	    } else {
+	    	
+	    	if(customerController.findCustomer(textField.getText()) == null) {
+	    		
+	        JOptionPane.showMessageDialog(null, "Kunde eksisterer ikke", "Fejl", JOptionPane.PLAIN_MESSAGE);
+	    	}
+	    
+	    }
 	}
 }

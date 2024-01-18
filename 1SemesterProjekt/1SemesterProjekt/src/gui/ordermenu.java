@@ -14,20 +14,25 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import controller.CustomerController;
 import controller.OrderController;
 
 public class ordermenu extends JFrame {
 
 	private OrderController orderController;
+	private CustomerController customerController;
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnBack;
+
 
 	/**
 	 * Create the frame.
 	 */
 	public ordermenu() {
 		orderController = new OrderController();
+		customerController = new CustomerController();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,25 +66,45 @@ public class ordermenu extends JFrame {
 		});
 		panel_2.add(btnOrderCreate, "name_254181741858900");
 		
-		JButton btnFind = new JButton("Slet ordre");
-		panel_1.add(btnFind);
-		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 		panel_3.setLayout(new CardLayout(0, 0));
 		
 		JButton btnDeleteOrder = new JButton("Slet ordre");
+		btnDeleteOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		panel_3.add(btnDeleteOrder, "name_254194213853500");
+		
+		JPanel panel_4 = new JPanel();
+		panel_1.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		btnBack = new JButton("Gå tilbage");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goBack();
+			}
+		});
+		panel_4.add(btnBack, BorderLayout.CENTER);
 		
 		JButton btnOnlineOrder = new JButton("Online ordre");
 		panel_1.add(btnOnlineOrder);
 	}
 	
+	private void goBack() {
+		new MainPage().setVisible(true);
+		this.dispose();
+		
+		
+	}
+
 	private void createOrder() {
 		this.setVisible(false);
 		
 		orderController.createOrder(1);
 		
-		new popup(orderController).setVisible(true);
+		new popup(orderController, customerController).setVisible(true);
 	}
 }
