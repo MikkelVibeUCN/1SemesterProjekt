@@ -22,6 +22,10 @@ public class Discount {
 		this.discount = discount;
 	}
 	
+	public double getDiscountPercentage() {
+		return discountPercentage;
+	}
+	
 	public void setDiscountPercentage(float discountPercentage) {
 		this.discountPercentage = discountPercentage;
 	}

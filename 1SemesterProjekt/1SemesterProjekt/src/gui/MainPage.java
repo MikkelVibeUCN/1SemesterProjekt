@@ -90,6 +90,6 @@ public class MainPage extends JFrame {
 	private void goOrderMenu() {
 		setVisible(false);
 		
-		new ordermenu().setVisible(true);
+		new OrderMenu().setVisible(true);
 	}	
 }

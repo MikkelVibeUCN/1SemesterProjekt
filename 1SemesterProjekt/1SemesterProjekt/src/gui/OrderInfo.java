@@ -40,9 +40,6 @@ public class OrderInfo extends JFrame {
 
 	private ArrayList<OrderLinePanel> orderLinePanels;
 	
-	/**
-	 * Create the frame.
-	 */
 	public OrderInfo(OrderController orderController) {
 		productController = new ProductController();
 		this.orderController = orderController;
@@ -242,14 +239,14 @@ public class OrderInfo extends JFrame {
 	}
 	
 	private void cancel() {
-		new ordermenu().setVisible(true);
+		new OrderMenu().setVisible(true);
 		
 		dispose();
 	}
 	
 	private void confirm() {
 		if(orderController.confirmOrder()) {
-			new MainPage().setVisible(rootPaneCheckingEnabled);
+			new OrderPrint(orderController.getOrder()).setVisible(true);
 			
 			dispose();
 		}

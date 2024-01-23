@@ -2,6 +2,10 @@ package model.order;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 import model.product.UniqueCopy;
 import model.product.UniqueProduct;
 import model.product.Copy;
@@ -13,9 +17,10 @@ import model.Customer;
 import model.SalesAssistant;
 
 public class Order {
+	private String orderTime;
 	private Customer customer;
 	private SalesAssistant salesAssistant;
-	DecimalFormat formatter = new DecimalFormat("0.00");
+	
 	private int orderID;
 	private ArrayList<Copy> copies;
 	private ArrayList<OrderLine> orderLines;
@@ -27,6 +32,10 @@ public class Order {
 		copies = new ArrayList<>();
 		orderLines = new ArrayList<>();
 		orderID = ++count;
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		orderTime = dtf.format(now);
 	}
 	
 	public void createOrderLine(int quantity, Product product) {
@@ -38,7 +47,18 @@ public class Order {
 		this.customer = customer;
 	}
 	
-
+	public String getOrderTime() {
+		return orderTime;
+	}
+	
+	public String getCustomerName() {
+		return customer.getName();
+	}
+	
+	public String getCustomerType() {
+		return customer.getType();
+	}
+	
 	public boolean addCopyToOrder(Copy copy) {
 		try{
 			copies.add(copy);
@@ -51,6 +71,10 @@ public class Order {
 	
 	public int getID() {
 		return orderID;
+	}
+	
+	public double getDiscountPercentage() {
+		return customer.getDiscount().getDiscountPercentage();
 	}
 	
 	public int getSalesAssistantID() {
@@ -82,52 +106,6 @@ public class Order {
 		return result;
 	}
 	
-	public ArrayList<String> getInfo() {
-		ArrayList<String> result = new ArrayList<>();
-		result.add("ID af ordren: " + orderID);
-		
-		for(OrderLine orderLine : orderLines) {			
-			result.add(getOrderLineString(orderLine));
-		}
-		
-		for(Copy copy : copies) {			
-			result.add(getCopyString(copy));
-		}
-		
-		result.add("Total " + formatter.format(totalPrice()));
-		
-		result.add("Ekspederet af: " + salesAssistant.getName());
-		
-		return result;
-	}
-	
-	private String getOrderLineString(OrderLine orderLine) {
-		return "Navn: " + orderLine.getProduct().getName() + 
-				", stregkode: " + orderLine.getProduct().getBarcode() + 
-				", pris: " + orderLine.getProduct().getPrice() + 
-				", aktuel pris: " + formatter.format(withDiscount(orderLine.getProduct().getPrice())) +
-				", antal: " + orderLine.getQuantity() +
-				", subtotal: " + formatter.format(withDiscount(orderLine.getSubTotal()));
-	}
-	
-	private String getCopyString(Copy copy) {
-		Product product = copy.getOrigin();
-		
-		String priceString = ", pris: " + formatter.format(product.getPrice());
-		String priceAfterDiscountString = ", aktuel pris: " + formatter.format(withDiscount(product.getPrice()));
-		
-		if(copy instanceof LoanCopy) {
-			priceString += " per time.";
-			priceAfterDiscountString += " per time.";
-		} 
-		
-		return "Navn: " + product.getName() + 
-				", stregkkode: " + product.getBarcode() +
-				", serienummer: " + copy.getSerialNo() +
-				priceString + 
-				priceAfterDiscountString;
-	}
-	
 	public boolean deleteOrderLine(String productName) {
 		boolean result = false;
 		int i = -1;
@@ -142,9 +120,17 @@ public class Order {
 	}
 	
 	public double totalPrice() {
+		return withDiscount(getTotalSubTotal());
+	}
+	
+	public double getDiscountAmount() {
+		return  getTotalSubTotal() - totalPrice();
+	}
+	
+	public double getTotalSubTotal() {
 		double result = 0;
 		for(OrderLine orderLine : orderLines) {
-			result += withDiscount(orderLine.getSubTotal());
+			result += orderLine.getSubTotal();
 		}
 		return result;
 	}

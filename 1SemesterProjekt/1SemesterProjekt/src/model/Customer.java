@@ -28,4 +28,8 @@ public class Customer extends Person implements Comparable<Customer> {
 	public Discount getDiscount() {
 		return discount;
 	}
+	
+	public String getType() {
+		return type;
+	}
 }

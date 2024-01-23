@@ -163,8 +163,4 @@ public class OrderController {
 		}
 		return message;
 	}
-	
-	public ArrayList<String> orderInfoMessages() {
-		return currentOrder.getInfo();
-	}
 }

@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import controller.CustomerController;
 import controller.OrderController;
 
-public class ordermenu extends JFrame {
+public class OrderMenu extends JFrame {
 
 	private OrderController orderController;
 	private CustomerController customerController;
@@ -30,7 +30,7 @@ public class ordermenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ordermenu() {
+	public OrderMenu() {
 		orderController = new OrderController();
 		customerController = new CustomerController();
 		
@@ -96,8 +96,6 @@ public class ordermenu extends JFrame {
 	private void goBack() {
 		new MainPage().setVisible(true);
 		this.dispose();
-		
-		
 	}
 
 	private void createOrder() {
@@ -105,6 +103,6 @@ public class ordermenu extends JFrame {
 		
 		orderController.createOrder(1);
 		
-		new popup(orderController, customerController).setVisible(true);
+		new PopUp(orderController, customerController).setVisible(true);
 	}
 }

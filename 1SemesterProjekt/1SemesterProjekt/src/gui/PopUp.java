@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import controller.OrderController;
 import controller.CustomerController;
 
-public class popup extends JDialog {
+public class PopUp extends JDialog {
 	private OrderController orderController;
 	private CustomerController customerController;
 	
@@ -28,7 +28,7 @@ public class popup extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public popup(OrderController orderController, CustomerController customerController) {
+	public PopUp(OrderController orderController, CustomerController customerController) {
 		this.orderController = orderController;
 		this.customerController = customerController;
 		
@@ -92,7 +92,7 @@ public class popup extends JDialog {
 	}
 	
 	private void cancel() {
-		new ordermenu().setVisible(true);
+		new OrderMenu().setVisible(true);
 		
 		dispose();
 	}
