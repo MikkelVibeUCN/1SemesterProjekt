@@ -9,22 +9,16 @@ public class OrderLinePanel {
 	private JTextField quantityField;
 	private String name;
 	private int quantity;
-	private int positionIndex;
 	
-	public OrderLinePanel(JPanel orderLinePanel, JTextField quantityField, String name, int quantity, int positionIndex) {
+	public OrderLinePanel(JPanel orderLinePanel, JTextField quantityField, String name, int quantity) {
 		this.orderLinePanel = orderLinePanel;
 		this.quantityField = quantityField;
 		this.name = name;
 		this.quantity = quantity;
-		this.positionIndex = positionIndex;
 	}
 	
 	public int getQuantity() {
 		return quantity;
-	}
-	
-	public int getPosistionIndex() {
-		return positionIndex;
 	}
 	
 	public String getName() {
@@ -34,10 +28,7 @@ public class OrderLinePanel {
 	public JPanel getOrderLinePanel() {
 		return orderLinePanel;
 	}
-	
-	public void setPositionIndex(int index) {
-		this.positionIndex = index;
-	}
+
 	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;

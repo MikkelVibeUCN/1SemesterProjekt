@@ -45,11 +45,12 @@ public class TryMe {
 	public static void createTestData() {
 		// Create Products
 		ProductContainer productContainer = ProductContainer.getInstance();
-		
+
 		for(int i = 0; i < 28000; i++) {
 			 ShelfProduct newProduct = new ShelfProduct("test", (double)200, (double)200, "product-swag", randomBarcode(), 200, 500, 300, "group 1");
 			 productContainer.addProduct(newProduct);	 
 		}
+		
 		UniqueProduct prod = new UniqueProduct("seje", (double)200, (double)300, "product-inside", 100, 200, 140, 1234567);
 		productContainer.addProduct(prod);
 		
@@ -60,10 +61,6 @@ public class TryMe {
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456785, prod));
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456786, prod));
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456787, prod));
-		
-//		for(Product product : productContainer.getProducts()) {
-//			System.out.println(product.getBarcode());
-//		}
 		
 		productContainer.addProduct(new ShelfProduct("test1", (double)200, (double)200, "product-swag", 123456, 200, 500, 300, "group 1"));
 		
@@ -94,8 +91,5 @@ public class TryMe {
 		SalesAssistantContainer salesContainer = SalesAssistantContainer.getInstance();
 		
 		salesContainer.addSalesAssistant(salesAssistant);
-		
-		
-		
 	}
 }

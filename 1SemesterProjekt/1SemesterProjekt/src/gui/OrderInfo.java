@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -26,7 +27,7 @@ import controller.OrderController;
 import controller.ProductController;
 import model.order.OrderLine;
 
-public class orderinfo extends JFrame {
+public class OrderInfo extends JFrame {
 	private OrderController orderController;
 	private ProductController productController;
 	
@@ -42,7 +43,7 @@ public class orderinfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public orderinfo(OrderController orderController) {
+	public OrderInfo(OrderController orderController) {
 		productController = new ProductController();
 		this.orderController = orderController;
 		orderLinePanels = new ArrayList<>();
@@ -112,6 +113,28 @@ public class orderinfo extends JFrame {
 		JLabel lblOrderInfo = new JLabel("Ordreoversigt");
 		panel_4.add(lblOrderInfo);
 		
+		JPanel panel_2 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+		flowLayout.setHgap(100);
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		
+		JButton btnOrderCancel = new JButton("Annuller");
+		btnOrderCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancel();
+			}
+		});
+		panel_2.add(btnOrderCancel);
+		
+		JButton btnOrderConfirm = new JButton("Bekræft");
+		btnOrderConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				confirm();
+			}
+		});
+		panel_2.add(btnOrderConfirm);
+		
 		// Orderline setup
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -122,15 +145,14 @@ public class orderinfo extends JFrame {
 		centerOfOL = new JPanel();
 		centerOfOL.setLayout(new BoxLayout(centerOfOL, BoxLayout.Y_AXIS));
 		scrollPane.setViewportView(centerOfOL);
+		
+		
 	}
 	
 	private void addProduct() {
-		int barcode = 0;
-		int quantity = 0;
-		
 		try {
-			barcode = Integer.parseInt(barcodeField.getText());
-			quantity = Integer.parseInt(quantityField.getText());
+			int barcode = Integer.parseInt(barcodeField.getText());
+			int quantity = Integer.parseInt(quantityField.getText());
 			
 			if(orderController.addProductByBarcode(quantity, barcode)) {
 				String name = productController.getNameFromBarcode(barcode);
@@ -141,20 +163,28 @@ public class orderinfo extends JFrame {
 					panel.getOrderLinePanel().revalidate();
 				}
 				else {
-					createOrderline(name, quantity);
+					createOrderLine(name, quantity);
 				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Produkt findes ikke", "Fejl", JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 		catch (Exception e) {
-			// Error handling
+			JOptionPane.showMessageDialog(null, "Input skal være et tal", "Fejl", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 
 	private OrderLinePanel getOrderLinePanelFromName(String name) {
 		OrderLinePanel result = null;
-		for(OrderLinePanel orderLinePanel : orderLinePanels) {
-			if(orderLinePanel.getName().equals(name)) {
-				result = orderLinePanel;
+		int i = -1;
+		boolean found = false;
+		
+		while(!found && ++i < orderLinePanels.size()) {
+			OrderLinePanel currPanel = orderLinePanels.get(i);
+			if(currPanel.getName().equals(name)) {
+				result = currPanel;
+				found = true;
 			}
 		}
 		return result;
@@ -168,7 +198,7 @@ public class orderinfo extends JFrame {
 		return result;
 	}
 	
-	private void createOrderline(String name, int quantity) {
+	private void createOrderLine(String name, int quantity) {
 		JPanel orderlinePanel = new JPanel();
 		centerOfOL.add(orderlinePanel);
 		orderlinePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -188,20 +218,42 @@ public class orderinfo extends JFrame {
 				deletePanel(getOrderLinePanelFromName(name));
 			}
 		});
+		
 		orderlinePanel.add(btnDelete);
 		
 		orderlinePanel.revalidate();
 		
-		orderLinePanels.add(new OrderLinePanel(orderlinePanel, textField_2, name, quantity, orderLinePanels.size()));
+		orderLinePanels.add(new OrderLinePanel(orderlinePanel, textField_2, name, quantity));
 	}
 	
 	private void deletePanel(OrderLinePanel panel) {
-		JPanel currentJPanel = panel.getOrderLinePanel();
+		if(orderController.deleteOrderLine(panel.getName())) {
+			JPanel currentJPanel = panel.getOrderLinePanel();
+			
+			currentJPanel.removeAll();
+			orderLinePanels.remove(panel);
+			remove(currentJPanel);
+			revalidate();
+			repaint();
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Noget gik galt...", "Fejl", JOptionPane.PLAIN_MESSAGE);
+		}
+	}
+	
+	private void cancel() {
+		new ordermenu().setVisible(true);
 		
-		//currentJPanel.removeAll();
-		this.remove(currentJPanel);
-		orderLinePanels.remove(panel);
-		this.revalidate();
-		this.repaint();
+		dispose();
+	}
+	
+	private void confirm() {
+		if(orderController.confirmOrder()) {
+			new MainPage().setVisible(rootPaneCheckingEnabled);
+			
+			dispose();
+		}
+		else 
+			JOptionPane.showMessageDialog(null, "Ordren er tom", "Fejl", JOptionPane.PLAIN_MESSAGE);
 	}
 }

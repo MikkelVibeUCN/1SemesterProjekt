@@ -6,6 +6,12 @@ import java.util.Random;
 import model.Customer;
 import tui.MainMenu;
 
+
+
+// temp
+import tui.TryMe;
+import model.product.ProductContainer;
+
 public class CustomerContainer {
 	private ArrayList<Customer> customers;
 	private static final int START_SIZE = 1000;
@@ -27,6 +33,10 @@ public class CustomerContainer {
 		insertionSortLast();
 	}
 	
+	public ArrayList<Customer> getCustomers() {
+		return customers;
+	}
+	
 	
 	/**
 	 * findCustomer() finds a customer object by performing binary search
@@ -36,24 +46,27 @@ public class CustomerContainer {
 	public Customer findCustomer(String phoneNo) {
 		Customer result = null; 
 		
-		
 		boolean found = false;
 		int start = 0;
 		int end = customers.size();
+		
+		if(customers.size() > 1) {
+			end--;
+		}
 		int middle = customers.size()/2;
 		
-		while(!found && middle != end) {
+		while(!found && start <= end) {
+			middle = start+(end - start)/2;
+			
 			if(customers.get(middle).getPhoneNo().equals(phoneNo)) {
 				result = customers.get(middle);
 				found = true;
 			}
 			else if(customers.get(middle).getPhoneNo().compareTo(phoneNo) < 0) {
-				start = middle;
-				middle = (start+end)/2;
+				start = middle + 1;
 			}
 			else if(customers.get(middle).getPhoneNo().compareTo(phoneNo) > 0){
-				end = middle;
-				middle = (start+end)/2;
+				end = middle - 1;
 			}
 		}
 		return result;
@@ -71,10 +84,32 @@ public class CustomerContainer {
 			while(customers.get(variableIndex).compareTo(customers.get(variableIndex+1)) > 0 ) {
 				Collections.swap(customers, variableIndex, variableIndex+1);
 				
-				if(variableIndex-1 > 0) {
+				if(variableIndex-1 >= 0) {
 					variableIndex--;
 				} 
 			}
 		}
 	}
+	
+	public static void main(String[] args) {
+		TryMe.createTestData();
+		
+		CustomerContainer container = CustomerContainer.getInstance();
+		
+		for(Customer customer : container.getCustomers()) {
+			System.out.println(customer.getPhoneNo());
+		}
+		
+		
+        container.findCustomer("11");
+        
+        
+        
+        ProductContainer containerProduct = ProductContainer.getInstance();
+        
+        //containerProduct.findProduct(1111111);
+    }
+	
+	
+	
 }

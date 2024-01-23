@@ -128,6 +128,19 @@ public class Order {
 				priceAfterDiscountString;
 	}
 	
+	public boolean deleteOrderLine(String productName) {
+		boolean result = false;
+		int i = -1;
+		while(++i < orderLines.size()) {
+			OrderLine currentOrderLine = orderLines.get(i);
+			if(currentOrderLine.getProduct().getName().equals(productName)) {
+				orderLines.remove(i);
+				result = true;
+			}
+		}
+		return result;
+	}
+	
 	public double totalPrice() {
 		double result = 0;
 		for(OrderLine orderLine : orderLines) {

@@ -25,9 +25,7 @@ public class MainPage extends JFrame {
 	 */
 	public static void main(String[] args) {
 		
-		TryMe tryMe = new TryMe();
-		
-		tryMe.createTestData();
+		TryMe.createTestData();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

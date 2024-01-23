@@ -57,6 +57,10 @@ public class OrderController {
 		return result;
 	}
 	
+	public boolean deleteOrderLine(String productName) {
+		return currentOrder.deleteOrderLine(productName);
+	}
+	
 	/**
 	 * addProductByBarcode() adds a bulk product to the order
 	 * @param quantity, the amount to add

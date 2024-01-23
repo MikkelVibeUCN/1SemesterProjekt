@@ -41,24 +41,30 @@ public class ProductContainer {
 		boolean found = false;
 		int start = 0;
 		int end = products.size();
+		
+		if(products.size() > 1) {
+			end--;
+		}
 		int middle = products.size()/2;
-		while(!found && middle != end) {
+		
+		while(!found && start <= end) {
+			middle = start+(end - start)/2;
+			
 			if(products.get(middle).getBarcode() == barcode) {
 				result = products.get(middle);
 				found = true;
 			}
 			else if(barcode > products.get(middle).getBarcode()) {
-				start = middle;
-				middle = (start+end)/2;
+				start = middle + 1;
 			}
-			else if(barcode < products.get(middle).getBarcode()){
-				end = middle;
-				middle = (start+end)/2;
+			else if(barcode < products.get(middle).getBarcode()) {
+				end = middle - 1;
+				
 			}
 		}
 		return result;
 	}
-	
+
 //	public void insertionSortAll() {
 //		for(int i = 0; i < products.size() && products.size() > 1 && i != products.size()-1; i++) {
 //			int variableIndex = i;
@@ -84,7 +90,7 @@ public class ProductContainer {
 			while(products.get(variableIndex).compareTo(products.get(variableIndex+1)) > 0 ) {
 				Collections.swap(products, variableIndex, variableIndex+1);
 				
-				if(variableIndex-1 > 0) {
+				if(variableIndex-1 >= 0) {
 					variableIndex--;
 				} 
 			}

@@ -64,19 +64,24 @@ public class popup extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						cancel();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
-	
 	private void addCustomerToOrder() {
 	    if (orderController.addCustomerToOrder(textField.getText())) {
 	        setVisible(false);
 	        
-	        new orderinfo(orderController).setVisible(true);
+	        new OrderInfo(orderController).setVisible(true);
 	        
-	    } else {
+	    } 
+	    else {
 	    	
 	    	if(customerController.findCustomer(textField.getText()) == null) {
 	    		
@@ -84,5 +89,11 @@ public class popup extends JDialog {
 	    	}
 	    
 	    }
+	}
+	
+	private void cancel() {
+		new ordermenu().setVisible(true);
+		
+		dispose();
 	}
 }
