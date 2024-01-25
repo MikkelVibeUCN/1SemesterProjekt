@@ -140,7 +140,7 @@ public class OrderPrint extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel_15.add(panel_13);
 		
-		JLabel lblSubTotal_2Static = new JLabel("SubTotal");
+		JLabel lblSubTotal_2Static = new JLabel("Subtotal");
 		panel_13.add(lblSubTotal_2Static);
 		
 		JPanel panel_14 = new JPanel();
@@ -203,10 +203,10 @@ public class OrderPrint extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_7.add(panel_2);
 		
-		JButton btnOrderCancel = new JButton("Annuller");
+		JButton btnOrderCancel = new JButton("Print");
 		panel_2.add(btnOrderCancel);
 		
-		JButton btnOrderConfirm = new JButton("Bekræft");
+		JButton btnOrderConfirm = new JButton("Ok");
 		panel_2.add(btnOrderConfirm);
 	}
 	

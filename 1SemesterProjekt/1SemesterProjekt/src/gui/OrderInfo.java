@@ -229,7 +229,7 @@ public class OrderInfo extends JFrame {
 			
 			currentJPanel.removeAll();
 			orderLinePanels.remove(panel);
-			remove(currentJPanel);
+			centerOfOL.remove(currentJPanel);
 			revalidate();
 			repaint();
 		}
