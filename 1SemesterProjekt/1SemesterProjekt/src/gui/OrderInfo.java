@@ -133,7 +133,6 @@ public class OrderInfo extends JFrame {
 		panel_2.add(btnOrderConfirm);
 		
 		// Orderline setup
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -142,8 +141,6 @@ public class OrderInfo extends JFrame {
 		centerOfOL = new JPanel();
 		centerOfOL.setLayout(new BoxLayout(centerOfOL, BoxLayout.Y_AXIS));
 		scrollPane.setViewportView(centerOfOL);
-		
-		
 	}
 	
 	private void addProduct() {

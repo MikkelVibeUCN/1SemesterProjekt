@@ -69,7 +69,6 @@ public class OrderPrint extends JFrame {
 			createOrderLine(orderLine.getProduct().getPrice(), orderLine.getQuantity(), orderLine.getSubTotal(), orderLine.getProduct().getName());
 		}
 		
-		// 
 		JPanel panel_10 = new JPanel();
 		panel_2_1.add(panel_10, BorderLayout.NORTH);
 		panel_10.setLayout(new GridLayout(0, 1, 0, 0));
@@ -207,6 +206,11 @@ public class OrderPrint extends JFrame {
 		panel_2.add(btnOrderCancel);
 		
 		JButton btnOrderConfirm = new JButton("Ok");
+		btnOrderConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				confirm();
+			}
+		});
 		panel_2.add(btnOrderConfirm);
 	}
 	
@@ -235,5 +239,11 @@ public class OrderPrint extends JFrame {
 		JLabel lblSubTotal = new JLabel(formatter.format(subTotal));
 		lblSubTotal.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_6.add(lblSubTotal);
+	}
+	
+	private void confirm() {
+		new MainPage().setVisible(true);
+		
+		dispose();
 	}
 }
