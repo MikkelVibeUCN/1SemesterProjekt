@@ -1,16 +1,8 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import model.Customer;
-import tui.MainMenu;
-
-
-
-// temp
-import tui.TryMe;
-import model.product.ProductContainer;
 
 public class CustomerContainer {
 	private ArrayList<Customer> customers;
@@ -90,26 +82,4 @@ public class CustomerContainer {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		TryMe.createTestData();
-		
-		CustomerContainer container = CustomerContainer.getInstance();
-		
-		for(Customer customer : container.getCustomers()) {
-			System.out.println(customer.getPhoneNo());
-		}
-		
-		
-        container.findCustomer("11");
-        
-        
-        
-        ProductContainer containerProduct = ProductContainer.getInstance();
-        
-        //containerProduct.findProduct(1111111);
-    }
-	
-	
-	
 }
