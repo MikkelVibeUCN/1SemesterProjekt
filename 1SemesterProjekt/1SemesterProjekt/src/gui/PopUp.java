@@ -63,10 +63,31 @@ public class PopUp extends JDialog {
 			}
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						addCustomerToOrder();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 			}
 		}
+	}
+	
+	private void addCustomerToOrder() {
+	    if (orderController.addCustomerToOrder(textField.getText())) {
+	        setVisible(false);
+
+	        new OrderInfo(orderController).setVisible(true);
+
+	    } 
+	    else {
+
+	    	if(customerController.findCustomer(textField.getText()) == null) {
+
+	        JOptionPane.showMessageDialog(null, "Kunde eksisterer ikke", "Fejl", JOptionPane.PLAIN_MESSAGE);
+	    	}
+	    }
 	}
 	
 	private void cancel() {
