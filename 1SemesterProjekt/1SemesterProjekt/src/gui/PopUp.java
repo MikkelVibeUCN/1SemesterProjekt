@@ -52,18 +52,7 @@ public class PopUp extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						addCustomerToOrder();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Annuller");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cancel();
@@ -72,23 +61,12 @@ public class PopUp extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+			}
 		}
-	}
-	private void addCustomerToOrder() {
-	    if (orderController.addCustomerToOrder(textField.getText())) {
-	        setVisible(false);
-	        
-	        new OrderInfo(orderController).setVisible(true);
-	        
-	    } 
-	    else {
-	    	
-	    	if(customerController.findCustomer(textField.getText()) == null) {
-	    		
-	        JOptionPane.showMessageDialog(null, "Kunde eksisterer ikke", "Fejl", JOptionPane.PLAIN_MESSAGE);
-	    	}
-	    
-	    }
 	}
 	
 	private void cancel() {
