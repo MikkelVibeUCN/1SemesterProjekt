@@ -126,41 +126,4 @@ public class OrderController {
 	public int getStockAmount(int barcode) {
 		return productController.getStockAmount(barcode);
 	}
-	
-	/**
-	 * stockMessage() creates and formats a message depending on the state of the stock amount.
-	 * @param barcode, the barcode of the product.
-	 * @param amount, the stock amount to check with.
-	 * @return String containing the message to print to the user.
-	 */
-	public String stockMessage(int barcode, int amount) {
-		String result = "Error finding product, please try again";
-		Product product = productController.findProduct(barcode);
-		
-		if(product instanceof ShelfProduct) {
-			ShelfProduct shelfP = ((ShelfProduct) product);
-			int currentStock = shelfP.getStockAmount();
-			
-			if((currentStock - amount) > 0) {
-				result = "Antal på " + amount + " er godkendt";
-			}
-			else {
-				result = "Antal på " + currentStock + " er godkendt og " + (amount - currentStock) + " er tilføjet som restordre";
-			}
-			productController.removeStock(barcode, amount);
-		}
-		return result + "\n";
-	}
-	
-	public String introMessage() {
-		String message = "Indtast produkt barcode ";
-		
-		if(currentOrder.getOrderLines().size() > 0) {
-			message += "eller tast \"0\" for at bekræfte";
-		} 
-		else {
-			message += "eller tast \"0\" for at afslutte";
-		}
-		return message;
-	}
 }
