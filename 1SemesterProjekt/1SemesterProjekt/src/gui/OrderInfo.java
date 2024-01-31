@@ -205,7 +205,7 @@ public class OrderInfo extends JFrame {
 		orderlinePanel.add(textField_2);
 		
 		JButton btnDelete = new JButton("Fjern");
-		btnDelete.setBackground(Color.RED);
+		btnDelete.setBackground(Color.YELLOW);
 		
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
