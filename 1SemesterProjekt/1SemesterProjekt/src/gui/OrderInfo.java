@@ -165,7 +165,7 @@ public class OrderInfo extends JFrame {
 			}
 		}
 		catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Input skal være et tal", "Fejl", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Input skal være et tal (" +e + ")" , "Fejl", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 

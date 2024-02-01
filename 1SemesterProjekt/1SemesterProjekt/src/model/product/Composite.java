@@ -20,7 +20,6 @@ public class Composite extends Product {
 		this.stockAmount = stockAmount;
 		this.productGroup = productGroup;
 		this.products = new ArrayList<>();
-		
 	}
 	
 	public void addProduct(Product product) {

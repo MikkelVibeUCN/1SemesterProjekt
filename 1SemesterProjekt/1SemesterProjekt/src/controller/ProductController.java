@@ -1,7 +1,6 @@
 package controller;
 import model.product.*;
 
-
 /**
  * ProductController handles everything to do with products
  * @author gruppe-1
@@ -50,21 +49,9 @@ public class ProductController {
 			result = product.getName();
 		}
 		return result;
-		
 	}
 	
 	public Product findProduct(int barcode) {
 		return productContainer.findProduct(barcode);
 	}
-	
-	
-	public static void main(String[] args) {
-        ProductController controller = new ProductController();
-        
-        ShelfProduct shelfBoi = new ShelfProduct("test", (double)200, (double)200, "product-swag", 25555, 200, 500, 300, "group 1");
-        
-        Composite kitchen = new Composite("Kitchen", (double)200, (double)200, "kitchen-product", 25676, 200, 500, 300, "group 1");
-        
-        kitchen.addProduct(shelfBoi);
-    }
 }

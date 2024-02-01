@@ -5,7 +5,6 @@ public abstract class Copy {
 	private String state;
 	private int serialNo;
 	
-	
 	public Copy(String location, String state, int serialNo) {
 		this.location = location;
 		this.state = state;

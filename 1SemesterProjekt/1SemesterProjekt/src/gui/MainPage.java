@@ -31,7 +31,8 @@ public class MainPage extends JFrame {
 				try {
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -87,8 +88,8 @@ public class MainPage extends JFrame {
 	}
 
 	private void goOrderMenu() {
-		setVisible(false);
-		
 		new OrderMenu().setVisible(true);
+		
+		dispose();
 	}	
 }

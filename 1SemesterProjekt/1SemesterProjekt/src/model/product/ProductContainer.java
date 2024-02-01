@@ -59,25 +59,10 @@ public class ProductContainer {
 			}
 			else if(barcode < products.get(middle).getBarcode()) {
 				end = middle - 1;
-				
 			}
 		}
 		return result;
 	}
-
-//	public void insertionSortAll() {
-//		for(int i = 0; i < products.size() && products.size() > 1 && i != products.size()-1; i++) {
-//			int variableIndex = i;
-//			
-//			while(products.get(variableIndex).compareTo(products.get(variableIndex+1)) > 0 ) {
-//				Collections.swap(products, variableIndex, variableIndex+1);
-//				
-//				if(i > 0 && variableIndex-1 > 0) {
-//					variableIndex--;
-//				} 
-//			}
-//		}
-//	}
 
 	/**
 	 * insertionSortLast sorts the last element by using insertion sort on the products array according to compareTo()

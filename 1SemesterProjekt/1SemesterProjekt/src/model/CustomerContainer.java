@@ -29,7 +29,6 @@ public class CustomerContainer {
 		return customers;
 	}
 	
-	
 	/**
 	 * findCustomer() finds a customer object by performing binary search
 	 * @param phoneNo, the phone number of the customer to find
@@ -63,7 +62,6 @@ public class CustomerContainer {
 		}
 		return result;
 	}
-	
 	
 	/**
 	 * insertionSortLast sorts the last element by using insertion sort on the customers array according to compareTo()

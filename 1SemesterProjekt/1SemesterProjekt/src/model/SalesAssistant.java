@@ -8,7 +8,6 @@ public class SalesAssistant extends Person {
 	public SalesAssistant(String name, String mail, String address, String phoneNo, int age) {
 		super(name, mail, address, phoneNo, age);
 		this.employeeID = ++count;
-		
 	}
 	
 	public int getID() {

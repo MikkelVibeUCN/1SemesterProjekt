@@ -51,7 +51,7 @@ public class TryMe {
 			 productContainer.addProduct(newProduct);	 
 		}
 		
-		UniqueProduct prod = new UniqueProduct("seje", (double)200, (double)300, "product-inside", 100, 200, 140, 1234567);
+		UniqueProduct prod = new UniqueProduct("2x4 træ", (double)200, (double)300, "product-inside", 100, 200, 140, 1234567);
 		productContainer.addProduct(prod);
 		
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456781, prod));
@@ -62,7 +62,7 @@ public class TryMe {
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456786, prod));
 		prod.addCopy(new UniqueCopy("somewhere", "available", 123456787, prod));
 		
-		productContainer.addProduct(new ShelfProduct("test1", (double)200, (double)200, "product-swag", 123456, 200, 500, 300, "group 1"));
+		productContainer.addProduct(new ShelfProduct("Skruetrækker", (double)200, (double)200, "product-swag", 123456, 200, 500, 300, "group 1"));
 		
 		// Create Customers
 		CustomerContainer customerContainer = CustomerContainer.getInstance();
@@ -72,8 +72,7 @@ public class TryMe {
 			customerContainer.addCustomer(newCustomer);
 		}
 		
-		
-		Customer customer = new Customer("Sejt navn", "seh@gmail.com", "aalborg somewhere lol", "12345678", 5, "Regular");
+		Customer customer = new Customer("Thomas", "seh@gmail.com", "aalborg somewhere lol", "12345678", 5, "Regular");
 		
 		customerContainer.addCustomer(customer);
 		DiscountContainer newContainer = DiscountContainer.getInstance();
@@ -86,7 +85,7 @@ public class TryMe {
 		
 		customer.setDiscount(discount);
 		
-		SalesAssistant salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 69", "6969", 17);
+		SalesAssistant salesAssistant = new SalesAssistant("Mikkeller", "666@hell.gg", "PureGym 60", "66", 17);
 		
 		SalesAssistantContainer salesContainer = SalesAssistantContainer.getInstance();
 		

@@ -110,9 +110,7 @@ public class OrderController {
 			
 			result = currentOrder.addCopyToOrder(copy);	
 		}
-		
 		return result;
-		
 	}
 	
 	public boolean confirmOrder() {

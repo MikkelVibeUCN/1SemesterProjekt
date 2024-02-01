@@ -21,7 +21,6 @@ public class PopUp extends JDialog {
 	private OrderController orderController;
 	private CustomerController customerController;
 	
-	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 
@@ -76,10 +75,9 @@ public class PopUp extends JDialog {
 	
 	private void addCustomerToOrder() {
 	    if (orderController.addCustomerToOrder(textField.getText())) {
-	        setVisible(false);
-
-	        new OrderInfo(orderController).setVisible(true);
-
+	    	new OrderInfo(orderController).setVisible(true);
+	    	
+	        dispose();	       
 	    } 
 	    else {
 

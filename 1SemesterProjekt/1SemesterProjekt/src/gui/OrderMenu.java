@@ -98,11 +98,11 @@ public class OrderMenu extends JFrame {
 		this.dispose();
 	}
 
-	private void createOrder() {
-		this.setVisible(false);
-		
+	private void createOrder() {		
 		orderController.createOrder(1);
 		
 		new PopUp(orderController, customerController).setVisible(true);
+		
+		dispose();
 	}
 }

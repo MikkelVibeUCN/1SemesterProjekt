@@ -11,5 +11,4 @@ public class UniqueCopy extends Copy {
 	public Product getOrigin() {
 		return originProduct;
 	}
-	
 }

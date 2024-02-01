@@ -10,8 +10,8 @@ public class LoanProduct extends Product {
 		super(name, minimumPrice, price, barcode);
 		this.hourlyPrice = hourlyPrice;
 		this.copies = new ArrayList<>();
-		
 	}
+	
 	public LoanCopy findCopy(int serialNo) {
 		LoanCopy result = null;
 		int i = 0;
